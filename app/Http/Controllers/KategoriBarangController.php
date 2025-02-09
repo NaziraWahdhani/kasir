@@ -30,7 +30,7 @@ class KategoriBarangController extends Controller
             'nama_kategori' => $request->nama_kategori
         ]);
 
-        return redirect()->route('kategori-barang')->with('success', 'Berhasil Menambah Kategori Barang');
+        return redirect()->route('master.kategori-barang')->with('success', 'Berhasil Menambah Kategori Barang');
     }
 
     public function delete($id)

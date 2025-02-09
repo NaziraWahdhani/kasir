@@ -39,6 +39,7 @@ Route::get('kategori-barang/delete/{id}', [KategoriBarangController::class, 'del
 
 Route::get('master/barang', [BarangController::class, 'index'])->name('master.barang');
 Route::get('master/barang/create', [BarangController::class, 'create'])->name('master.barang.create');
+Route::post('tambah-barang', [BarangController::class, 'store'])->name('master.barang.store');
 
 Route::get('penjualan', [PenjualanController::class, 'index'])->name('penjualan');
 Route::get('penjualan/create', [PenjualanController::class, 'create'])->name('penjualan.create');

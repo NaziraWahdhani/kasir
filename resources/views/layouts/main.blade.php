@@ -26,7 +26,17 @@
 <script type="text/javascript" src="{{ asset('assets/build/scripts/vendor.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/app/home.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/app/datatable/basic/menu.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/app/form/datepicker.js') }}"></script>
+{{--<script type="text/javascript" src="{{ asset('assets/app/form/datepicker.js') }}"></script>--}}
+
+<script>
+    $(document).ready(function () {
+        $("#datepicker-1, #datepicker-2").datepicker({
+            dateFormat: "dd-mm-yy",
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+</script>
 </body>
 
 </html>
