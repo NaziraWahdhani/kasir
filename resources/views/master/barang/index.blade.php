@@ -9,7 +9,6 @@
         </div>
     </div>
     <!-- END Preload -->
-
     <div class="header-holder header-holder-desktop">
         <div class="header-container container-fluid">
             <h4 class="header-title">Barang</h4>
@@ -21,14 +20,12 @@
                         <div class="breadcrumb-icon">
                             <i data-feather="home"></i>
                         </div>
-                        <span class="breadcrumb-text">Dashboard</span>
-                    </a>
+                        <span class="breadcrumb-text">Dashboard</span> </a>
                     <div class="breadcrumb-item">
                         <span class="breadcrumb-text">Master</span>
                     </div>
                     <a href="{{ route('master.barang') }}" class="breadcrumb-item">
-                        <span class="breadcrumb-text">Barang</span>
-                    </a>
+                        <span class="breadcrumb-text">Barang</span> </a>
                 </div>
                 <!-- END Breadcrumb -->
             </div>
@@ -61,26 +58,39 @@
                                     <th width="1">No</th>
                                     <th>Kode Barang</th>
                                     <th>Nama Barang</th>
+                                    <th>Kategori Barang</th>
                                     <th>Tanggal Kedaluarsa</th>
                                     <th>Tanggal Pembelian</th>
                                     <th>Harga Beli</th>
-                                    <th>Harga Jual</th>
+                                    <th>Harga Jual 1</th>
+                                    <th>Harga Jual 2</th>
+                                    <th>Harga Jual 3</th>
                                     <th>Jumlah Stok</th>
                                     <th>Minimal Stok</th>
+                                    <th width="1"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>0000</td>
-                                    <td>Es</td>
-                                    <td>12-12-2012</td>
-                                    <td>12-12-2012</td>
-                                    <td>20.000</td>
-                                    <td>20.000</td>
-                                    <td>90</td>
-                                    <td>10</td>
-                                </tr>
+                                @foreach($barang as $data)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $data->kode_barang }}</td>
+                                        <td>{{ $data->nama_barang }}</td>
+                                        <td>{{ $data->kategori->nama_kategori }}</td>
+                                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal_kedaluarsa)->format('d-m-Y') }}</td>
+                                        <td>{{ \Carbon\Carbon::createFromFormat('Y-m-d', $data->tanggal_pembelian)->format('d-m-Y') }}</td>
+                                        <td>Rp. {{ number_format($data->harga_beli, 0, ',', '.') }}</td>
+                                        <td>Rp. {{ number_format($data->harga_jual_1, 0, ',', '.') }}</td>
+                                        <td>Rp. {{ number_format($data->harga_jual_2, 0, ',', '.') }}</td>
+                                        <td>Rp. {{ number_format($data->harga_jual_3, 0, ',', '.') }}</td>
+                                        <td>{{ $data->stok }}</td>
+                                        <td>{{ $data->minimal_stok }}</td>
+                                        <td class="d-flex">
+                                            <a href="{{ route('master.barang.edit', ['id' => $data->id]) }}"><button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
+                                            <button class="btn btn-danger" data-id="{{ $data->id }}" onclick="alertDestroy({{ $data->id }})"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                             <!-- END Datatable -->

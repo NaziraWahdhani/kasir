@@ -2,7 +2,7 @@
 @section('content')
     <div class="header-holder header-holder-desktop">
         <div class="header-container container-fluid">
-            <h4 class="header-title">Barang</h4>
+            <h4 class="header-title">Data User</h4>
             <i class="header-divider"></i>
             <div class="header-wrap header-wrap-block justify-content-start">
                 <!-- BEGIN Breadcrumb -->
@@ -14,10 +14,10 @@
                         <span class="breadcrumb-text">Dashboard</span>
                     </a>
                     <div class="breadcrumb-item">
-                        <span class="breadcrumb-text">Master</span>
+                        <span class="breadcrumb-text">Pengaturan</span>
                     </div>
-                    <a href="{{ route('master.management-user') }}" class="breadcrumb-item">
-                        <span class="breadcrumb-text">Management User</span>
+                    <a href="{{ route('pengaturan.data-user') }}" class="breadcrumb-item">
+                        <span class="breadcrumb-text">Data User</span>
                     </a>
                     <div class="breadcrumb-item">
                         <span class="breadcrumb-text">Create</span>
@@ -58,16 +58,17 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <label for="tipe_pelanggan">Hak Akses</label>
-                            <select class="form-control" id="tipe_pelanggan">
+                            <label for="hak_akses">Hak Akses</label>
+                            <select class="form-control" name="hak_akses" id="hak_akses">
                                 <option selected>Pilih</option>
-                                <option>Pemilik</option>
-                                <option>Kasir</option>
+                                @foreach($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->role }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="text-right">
-                        <a href="#">
+                        <a href="{{ route('pengaturan.data-user') }}">
                             <button class="btn btn-secondary">Batal</button>
                         </a> <a href="#">
                             <button class="btn btn-primary">Tambah</button>

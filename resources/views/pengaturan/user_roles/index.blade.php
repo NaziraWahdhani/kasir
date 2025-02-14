@@ -12,7 +12,7 @@
 
     <div class="header-holder header-holder-desktop">
         <div class="header-container container-fluid">
-            <h4 class="header-title">Management User</h4>
+            <h4 class="header-title">User Roles</h4>
             <i class="header-divider"></i>
             <div class="header-wrap header-wrap-block justify-content-start">
                 <!-- BEGIN Breadcrumb -->
@@ -24,10 +24,10 @@
                         <span class="breadcrumb-text">Dashboard</span>
                     </a>
                     <div class="breadcrumb-item">
-                        <span class="breadcrumb-text">Master</span>
+                        <span class="breadcrumb-text">Pengaturan</span>
                     </div>
-                    <a href="{{ route('master.management-user') }}" class="breadcrumb-item">
-                        <span class="breadcrumb-text">Management User</span>
+                    <a href="" class="breadcrumb-item">
+                        <span class="breadcrumb-text">User Roles</span>
                     </a>
                 </div>
                 <!-- END Breadcrumb -->
@@ -48,8 +48,8 @@
                     <!-- BEGIN Portlet -->
                     <div class="portlet">
                         <div class="portlet-header portlet-header-bordered">
-                            <h3 class="portlet-title">Management User</h3>
-                            <a href="{{ route('master.management-user.create') }}">
+                            <h3 class="portlet-title">User Roles</h3>
+                            <a href="{{ route('pengaturan.user-roles.create') }}">
                                 <button class="btn btn-primary">Tambah</button>
                             </a>
                         </div>
@@ -58,17 +58,17 @@
                             <table id="datatable-1" class="table table-bordered table-striped table-hover">
                                 <thead>
                                 <tr>
-                                    <th width="1">No</th>
-                                    <th>Nama</th>
-                                    <th>Hak Akses</th>
+                                    <th>Role</th>
+                                    <th>Description</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($roles as $data)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Nazira</td>
-                                    <td>Pemilik</td>
+                                    <td>{{ $data->role }}</td>
+                                    <td>{{ $data->description }}</td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                             <!-- END Datatable -->

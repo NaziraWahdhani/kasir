@@ -49,9 +49,6 @@
                     <div class="portlet">
                         <div class="portlet-header portlet-header-bordered">
                             <h3 class="portlet-title">Laporan Penjualan</h3>
-                            <a href="">
-                                <button class="btn btn-primary">Tambah</button>
-                            </a>
                         </div>
                         <div class="portlet-body">
                             <!-- BEGIN Datatable -->

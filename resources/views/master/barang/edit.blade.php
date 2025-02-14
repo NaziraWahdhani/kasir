@@ -18,7 +18,7 @@
                     <a href="{{ route('master.barang') }}" class="breadcrumb-item">
                         <span class="breadcrumb-text">Barang</span> </a>
                     <div class="breadcrumb-item">
-                        <span class="breadcrumb-text">Create</span>
+                        <span class="breadcrumb-text">Edit</span>
                     </div>
                 </div>
                 <!-- END Breadcrumb -->
@@ -36,19 +36,20 @@
         <div class="container-fluid">
             <div class="portlet">
                 <div class="portlet-body">
-                    <form action="{{ route('master.barang.store') }}" method="post">
+                    <form action="{{ route('master.barang.update', $barang->id) }}" method="post">
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="kode_barang">Kode Barang</label>
-                                    <input type="text" name="kode_barang" class="form-control" required>
+                                    <input type="text" name="kode_barang" value="{{ $barang->kode_barang }}" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="nama_barang">Nama Barang</label>
-                                    <input type="text" name="nama_barang" class="form-control" required>
+                                    <input type="text" name="nama_barang" value="{{ $barang->nama_barang }}" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -57,7 +58,9 @@
                                     <select class="form-control" name="id_kategori_barang" id="id_kategori_barang">
                                         <option selected>Pilih</option>
                                         @foreach($kategoriBarang as $kategori)
-                                            <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
+                                            <option value="{{ $kategori->id }}" {{ $barang->id_kategori_barang == $kategori->id ? 'selected' : '' }}>
+                                                {{ $kategori->nama_kategori }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -66,7 +69,7 @@
                                 <div class="form-group">
                                     <label>Tanggal Kedaluarsa</label>
                                     <div class="input-group">
-                                        <input name="tanggal_kedaluarsa" type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-1">
+                                        <input name="tanggal_kedaluarsa" type="text" value="{{ $barang->tanggal_kedaluarsa }}" class="form-control" placeholder="Select date" id="datepicker-1">
                                         <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="fa fa-calendar-alt"></i>
@@ -79,7 +82,7 @@
                                 <div class="form-group">
                                     <label>Tanggal Pembelian</label>
                                     <div class="input-group">
-                                        <input name="tanggal_pembelian" type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-2">
+                                        <input name="tanggal_pembelian" type="text" value="{{ $barang->tanggal_pembelian }}" class="form-control" placeholder="Select date" id="datepicker-2">
                                         <div class="input-group-append">
                                         <span class="input-group-text">
                                             <i class="fa fa-calendar-alt"></i>
@@ -91,37 +94,37 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="harga_beli">Harga Beli</label>
-                                    <input type="text" name="harga_beli" class="form-control text-right" id="harga_beli" required>
+                                    <input type="text" name="harga_beli" value="{{ $barang->harga_beli }}" class="form-control" id="harga_beli" required>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="harga_jual_1">Harga Jual 1 (HPP + 10%)</label>
-                                    <input type="text" name="harga_jual_1" class="form-control text-right" id="harga_jual_1" readonly>
+                                    <input type="text" name="harga_jual_1" value="{{ $barang->harga_jual_1 }}" class="form-control" id="harga_jual_1" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="harga_jual_2">Harga Jual 2 (HPP + 20%)</label>
-                                    <input type="text" name="harga_jual_2" class="form-control text-right" id="harga_jual_2" readonly>
+                                    <input type="text" name="harga_jual_2" value="{{ $barang->harga_jual_2 }}" class="form-control" id="harga_jual_2" readonly>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="harga_jual_3">Harga Jual 3 (HPP + 30%)</label>
-                                    <input type="text" name="harga_jual_3" class="form-control text-right" id="harga_jual_3" readonly>
+                                    <input type="text" name="harga_jual_3" value="{{ $barang->harga_jual_3 }}" class="form-control" id="harga_jual_3" readonly>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="stok">Stok</label>
-                                    <input type="text" name="stok" class="form-control" id="stok" required>
+                                    <input type="text" name="stok" value="{{ $barang->stok }}" class="form-control" id="stok" required>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="minimal_stok">Minimal Stok</label>
-                                    <input type="text" name="minimal_stok" class="form-control" id="minimal_stok" required>
+                                    <input type="text" name="minimal_stok" value="{{ $barang->minimal_stok }}" class="form-control" id="minimal_stok" required>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +132,7 @@
                             <a href="{{ route('master.barang') }}">
                                 <button class="btn btn-secondary" type="button">Batal</button>
                             </a>
-                            <button class="btn btn-primary" type="submit">Tambah</button>
+                            <button class="btn btn-primary" type="submit">Update</button>
                         </div>
                     </form>
                 </div>

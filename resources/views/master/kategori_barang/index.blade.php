@@ -21,8 +21,7 @@
                         <div class="breadcrumb-icon">
                             <i data-feather="home"></i>
                         </div>
-                        <span class="breadcrumb-text">Dashboard</span>
-                    </a>
+                        <span class="breadcrumb-text">Dashboard</span> </a>
                     <div class="breadcrumb-item">
                         <span class="breadcrumb-text">Master</span>
                     </div>
@@ -39,6 +38,13 @@
             </div>
         </div>
     </div>
+
+    @if(session('success'))
+        <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <!-- END Header Holder -->
     <div class="content ">
         <div class="container-fluid">
@@ -69,8 +75,9 @@
                                         <td>{{ $kategori->kode_kategori }}</td>
                                         <td>{{ $kategori->nama_kategori }}</td>
                                         <td class="d-flex">
-                                            <button type="button" class="btn btn-warning">Edit</button>
-                                            <a href="{{ route('master.kategori-barang.delete', ['id' => $kategori->id]) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                            <a href="{{ route('master.kategori-barang.edit', $kategori->id) }}"><button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
+                                            @method('DELETE')
+                                            <button class="btn btn-danger" data-id="{{ $kategori->id }}" onclick="alertDestroy()"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -87,3 +94,4 @@
     <!-- END Page Content -->
     <!-- END Float Button -->
 @endsection
+

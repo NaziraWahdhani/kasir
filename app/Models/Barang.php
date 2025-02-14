@@ -13,4 +13,10 @@ class Barang extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = ['id_kategori_barang', 'kode_barang', 'nama_barang', 'tanggal_kedaluarsa', 'tanggal_pembelian', 'harga_beli', 'harga_jual_1', 'harga_jual_2', 'harga_jual_3', 'stok', 'minimal_stok'];
+
+    public function kategori()
+    {
+        // belongsTo(KategoriBarang::class, 'id_kategori_barang') → Menunjukkan bahwa setiap barang memiliki satu kategori yang diambil dari tabel kategori_barang
+        return $this->belongsTo(KategoriBarang::class, 'id_kategori_barang');
+    }
 }

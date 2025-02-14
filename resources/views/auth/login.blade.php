@@ -69,11 +69,8 @@
                                             </div>
                                         </div>
                                         <!-- END Form Group -->
-                                        <a href="#">Forgot password?</a>
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-between">
-											<span>Don't have an account ? <a href="..\..\../ltr/pages/register/register-1.html">Sign Up</a>
-											</span>
+                                    <div class="d-flex align-items-center justify-content-end">
                                         <button type="submit" class="btn btn-label-primary btn-lg btn-widest">Login</button>
                                     </div>
                                 </form>

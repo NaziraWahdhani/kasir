@@ -1,5 +1,4 @@
-
-    <!-- BEGIN Header -->
+<!-- BEGIN Header -->
     <div class="header">
         <!-- BEGIN Header Holder -->
         <div class="header-holder header-holder-desktop sticky-header" id="sticky-header-desktop">
@@ -58,4 +57,4 @@
         </div>
         <!-- END Header Holder -->
     </div>
-    <!-- END Page Wrapper -->
+<!-- END Page Wrapper -->

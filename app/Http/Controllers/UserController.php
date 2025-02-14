@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Roles;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index()
     {
-        return view('master.management_user.index');
+        return view('pengaturan.data_user.index');
     }
 
     public function create()
     {
-        return view('master.management_user.create');
+        $roles = Roles::all();
+        return view('pengaturan.data_user.create', compact('roles'));
     }
 }

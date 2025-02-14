@@ -2,7 +2,7 @@
 @section('content')
     <div class="header-holder header-holder-desktop">
         <div class="header-container container-fluid">
-            <h4 class="header-title">Pelanggan</h4>
+            <h4 class="header-title">Barang</h4>
             <i class="header-divider"></i>
             <div class="header-wrap header-wrap-block justify-content-start">
                 <!-- BEGIN Breadcrumb -->
@@ -18,7 +18,7 @@
                     <a href="{{ route('master.pelanggan') }}" class="breadcrumb-item">
                         <span class="breadcrumb-text">Pelanggan</span> </a>
                     <div class="breadcrumb-item">
-                        <span class="breadcrumb-text">Create</span>
+                        <span class="breadcrumb-text">Edit</span>
                     </div>
                 </div>
                 <!-- END Breadcrumb -->
@@ -36,34 +36,35 @@
         <div class="container-fluid">
             <div class="portlet">
                 <div class="portlet-body">
-                    <form action="{{ route('master.pelanggan.store') }}" method="post">
+                    <form action="{{ route('master.pelanggan.update', $pelanggan->id) }}" method="post">
                         @csrf
+                        @method('PUT')
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="nama">Nama Pelanggan</label>
-                                    <input type="text" name="nama" class="form-control" id="nama" required>
+                                    <input type="text" name="nama" value="{{ $pelanggan->nama }}" class="form-control" id="nama" required>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="alamat">Alamat</label>
-                                    <input type="text" name="alamat" class="form-control" id="alamat" required>
+                                    <input type="text" name="alamat" value="{{ $pelanggan->alamat }}" class="form-control" id="alamat" required>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="no_hp">No Hp</label>
-                                    <input type="text" name="no_hp" class="form-control" id="no_hp" required>
+                                    <input type="text" name="no_hp" value="{{ $pelanggan->no_hp }}" class="form-control" id="no_hp" required>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="jenis_kelamin">Jenis Kelamin</label>
                                     <select class="form-control" name="jenis_kelamin" id="jenis_kelamin" required>
-                                        <option selected>Pilih</option>
-                                        <option>Laki-laki</option>
-                                        <option>Perempuan</option>
+                                        <option value="" disabled {{ empty($pelanggan->jenis_kelamin) ? 'selected' : '' }}>Pilih</option>
+                                        <option value="Laki-laki" {{ old('jenis_kelamin', $pelanggan->jenis_kelamin ?? '') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                        <option value="Perempuan" {{ old('jenis_kelamin', $pelanggan->jenis_kelamin ?? '') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                     </select>
                                 </div>
                             </div>
@@ -71,17 +72,17 @@
                                 <div class="form-group">
                                     <label for="tipe_pelanggan">Tipe Pelanggan</label>
                                     <select class="form-control" name="tipe_pelanggan" id="tipe_pelanggan" required>
-                                        <option selected>Pilih</option>
-                                        <option>vvip</option>
-                                        <option>vip</option>
-                                        <option>biasa</option>
+                                        <option value="" disabled {{ empty($pelanggan->tipe_pelanggan) ? 'selected' : '' }}>Pilih</option>
+                                        <option value="VVIP" {{ old('tipe_pelanggan', $pelanggan->tipe_pelanggan ?? '') == 'VVIP' ? 'selected' : '' }}>VVIP</option>
+                                        <option value="VIP" {{ old('tipe_pelanggan', $pelanggan->tipe_pelanggan ?? '') == 'VIP' ? 'selected' : '' }}>VIP</option>
+                                        <option value="Biasa" {{ old('tipe_pelanggan', $pelanggan->tipe_pelanggan ?? '') == 'Biasa' ? 'selected' : '' }}>Biasa</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="poin_membership">Poin Membership</label>
-                                    <input type="text" name="poin_membership" class="form-control" id="poin_membership">
+                                    <input type="text" name="poin_membership" value="{{ $pelanggan->poin_membership }}" class="form-control" id="poin_membership">
                                 </div>
                             </div>
                         </div>
@@ -89,7 +90,7 @@
                             <a href="{{ route('master.pelanggan') }}">
                                 <button type="button" class="btn btn-secondary">Batal</button>
                             </a>
-                            <button class="btn btn-primary" type="submit">Tambah</button>
+                            <button class="btn btn-primary" type="submit">Update</button>
                         </div>
                     </form>
                 </div>

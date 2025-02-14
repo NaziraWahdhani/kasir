@@ -144,5 +144,4 @@
         </div>
     </div>
     <!-- END Page Content -->
-    </div>
 @endsection

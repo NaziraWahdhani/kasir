@@ -65,18 +65,26 @@
                                     <th>Jenis Kelamin</th>
                                     <th>Tipe Pelanggan</th>
                                     <th>Poin Membership</th>
+                                    <th width="1"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($pelanggan as $data)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Nazira</td>
-                                    <td>betak</td>
-                                    <td>08586836288</td>
-                                    <td>Perempuan</td>
-                                    <td>vvip</td>
-                                    <td>100%</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->nama }}</td>
+                                    <td>{{ $data->alamat }}</td>
+                                    <td>{{ $data->no_hp }}</td>
+                                    <td>{{ $data->jenis_kelamin }}</td>
+                                    <td><span class="badge badge-info">{{ $data->tipe_pelanggan }}</span></td>
+                                    <td>{{ $data->poin_membership }}</td>
+                                    <td class="d-flex">
+                                        <a href="{{ route('master.pelanggan.edit', $data->id) }}"><button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
+                                        @method('DELETE')
+                                        <button class="btn btn-danger delete-btn" data-id="{{ $data->id }}"><i class="fa fa-trash"></i></button>
+                                    </td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                             <!-- END Datatable -->
@@ -89,3 +97,51 @@
     </div>
     <!-- END Page Content -->
 @endsection
+@push('js')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Ambil semua tombol dengan class "delete-btn"
+            let deleteButtons = document.querySelectorAll(".delete-btn");
+            deleteButtons.forEach(function (button) {
+                button.addEventListener("click", function (event) {
+                    event.preventDefault(); // Mencegah link pindah halaman
+                    let id = this.getAttribute("data-id"); // Ambil ID dari tombol
+                    Swal.fire({
+                        title: "Apakah Anda yakin?",
+                        text: "Data akan dihapus secara permanen!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Ya, hapus!",
+                        cancelButtonText: "Batal"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Kirim permintaan DELETE ke server
+                            fetch(`/pelanggan/delete/${id}`, {
+                                method: "DELETE",
+                                headers: {
+                                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                    "Content-Type": "application/json"
+                                }
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        Swal.fire("Berhasil!", data.message, "success").then(() => {
+                                            location.reload(); // Refresh halaman
+                                        });
+                                    } else {
+                                        Swal.fire("Gagal!", data.message, "error");
+                                    }
+                                })
+                                .catch(() => {
+                                    Swal.fire("Oops!", "Terjadi kesalahan saat menghapus data.", "error");
+                                });
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+@endpush

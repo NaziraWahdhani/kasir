@@ -12,7 +12,7 @@
 
     <div class="header-holder header-holder-desktop">
         <div class="header-container container-fluid">
-            <h4 class="header-title">Laporan Stok Barang</h4>
+            <h4 class="header-title">Data User</h4>
             <i class="header-divider"></i>
             <div class="header-wrap header-wrap-block justify-content-start">
                 <!-- BEGIN Breadcrumb -->
@@ -24,10 +24,10 @@
                         <span class="breadcrumb-text">Dashboard</span>
                     </a>
                     <div class="breadcrumb-item">
-                        <span class="breadcrumb-text">Laporan</span>
+                        <span class="breadcrumb-text">Pengaturan</span>
                     </div>
-                    <a href="{{ route('laporan-stok') }}" class="breadcrumb-item">
-                        <span class="breadcrumb-text">Laporan Stok Barang</span>
+                    <a href="{{ route('pengaturan.data-user') }}" class="breadcrumb-item">
+                        <span class="breadcrumb-text">Data User</span>
                     </a>
                 </div>
                 <!-- END Breadcrumb -->
@@ -48,26 +48,24 @@
                     <!-- BEGIN Portlet -->
                     <div class="portlet">
                         <div class="portlet-header portlet-header-bordered">
-                            <h3 class="portlet-title">Laporan Stok Barang</h3>
-{{--                            <a href="">--}}
-{{--                                <button class="btn btn-primary">Tambah</button>--}}
-{{--                            </a>--}}
+                            <h3 class="portlet-title">Data User</h3>
+                            <a href="{{ route('pengaturan.data-user.create') }}">
+                                <button class="btn btn-primary">Tambah</button>
+                            </a>
                         </div>
                         <div class="portlet-body">
                             <!-- BEGIN Datatable -->
                             <table id="datatable-1" class="table table-bordered table-striped table-hover">
                                 <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Barang</th>
-                                    <th>Stok</th>
+                                    <th>Nama</th>
+                                    <th>Hak Akses</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>kayu</td>
-                                    <td>80</td>
+                                    <td>Nazira</td>
+                                    <td>Pemilik</td>
                                 </tr>
                                 </tbody>
                             </table>
