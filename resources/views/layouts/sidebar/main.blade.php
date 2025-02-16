@@ -50,6 +50,12 @@
                             <span class="menu-item-text">Barang</span>
                         </a>
                     </div>
+                    <div class="menu-item">
+                        <a href="{{ route('master.satuan') }}" data-menu-path="/ltr/portlet/drag.html" class="menu-item-link">
+                            <i class="menu-item-bullet"></i>
+                            <span class="menu-item-text">Satuan</span>
+                        </a>
+                    </div>
                 </div>
                 <!-- END Menu Submenu -->
             </div>

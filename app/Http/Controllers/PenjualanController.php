@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Pelanggan;
 use App\Models\Penjualan;
+use App\Models\Satuan;
 use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
@@ -16,16 +17,17 @@ class PenjualanController extends Controller
 
     public function create()
     {
+        $satuans = Satuan::all();
         $pelanggan = Pelanggan::all();
         $barang = Barang::all();
-        return view('penjualan.create', compact('pelanggan', 'barang'));
+        return view('penjualan.create', compact('pelanggan', 'barang', 'satuans'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'id_pelanggan' => 'required',
-            'no_penjualan' => 'required|unique',
+            'no_penjualan' => 'required',
             'tanggal' => 'required|date',
             'id_barang' => 'required',
             'jumlah' => 'required|integer',

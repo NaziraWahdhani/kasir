@@ -29,7 +29,7 @@
 <script type="text/javascript" src="{{ asset('assets/build/scripts/vendor.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/app/home.js') }}"></script>
 <script type="text/javascript" src="{{ asset('assets/app/datatable/basic/menu.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{{--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="{{ asset('assets/js/build.js') }}"></script>
 {{--<script type="text/javascript" src="{{ asset('assets/app/form/datepicker.js') }}"></script>--}}

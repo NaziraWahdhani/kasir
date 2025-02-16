@@ -6,6 +6,7 @@
     use App\Http\Controllers\LaporanStokController;
     use App\Http\Controllers\PelangganController;
     use App\Http\Controllers\PenjualanController;
+    use App\Http\Controllers\SatuanController;
     use App\Http\Controllers\UserController;
     use App\Http\Controllers\RolesController;
     use Illuminate\Support\Facades\Route;
@@ -48,6 +49,10 @@ Route::get('barang/edit/{id}', [BarangController::class, 'edit'])->name('master.
 Route::put('barang/update/{id}', [BarangController::class, 'update'])->name('master.barang.update');
 Route::delete('barang/delete/{id}', [BarangController::class, 'delete'])->name('master.barang.delete');
 Route::get('master/barang/harga', [BarangController::class, 'harga'])->name('master.barang.harga');
+
+Route::get('master/satuan', [SatuanController::class, 'index'])->name('master.satuan');
+Route::get('master/satuan/cretae', [SatuanController::class, 'create'])->name('master.satuan.create');
+Route::post('tambah-satuan', [SatuanController::class, 'store'])->name('master.satuan.store');
 
 Route::get('penjualan', [PenjualanController::class, 'index'])->name('penjualan');
 Route::get('penjualan/create', [PenjualanController::class, 'create'])->name('penjualan.create');

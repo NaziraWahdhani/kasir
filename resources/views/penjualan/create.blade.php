@@ -70,6 +70,7 @@
                             <thead>
                             <tr>
                                 <th>Barang</th>
+                                <th width="7%">Satuan</th>
                                 <th width="7%">Jumlah</th>
                                 <th width="10%">Harga</th>
                                 <th width="12%">Sub Total</th>
@@ -92,7 +93,8 @@
                                             </select>
                                         </div>
                                     </td>
-                                    <td>{!! Form::text('form_add_jumlah', old('form_add_jumlah'), ['class' => 'form-control text-center', 'id' => 'formJumlah0', 'data-input-type' => 'number-format', 'data-thousand-separator' => 'false',  'data-decimal-separator' => 'false', 'data-precision' => '0', 'onkeyup' => 'editJumlah(0)']) !!}</td>
+                                    <td>{!! Form::text('form_add_satuan', old('form_add_satuan'), ['class' => 'form-control', 'id' => 'formSatuan0', 'readonly']) !!}
+                                    <td>{!! Form::text('form_add_jumlah', old('form_add_jumlah'), ['class' => 'form-control text-center', 'id' => 'formJumlah0', 'data-input-type' => 'number-format', 'data-thousand-separator' => 'false',  'data-decimal-separator' => 'false', 'data-precision' => '1', 'onkeyup' => 'editJumlah(0)']) !!}</td>
                                     <td>{!! Form::text('form_add_harga', old('form_add_harga'), ['class' => 'form-control text-right', 'id' => 'formHarga0', 'data-input-type' => 'number-format', 'ondblclick' => 'edit_harga(this, 0)', 'onkeyup' => 'produkSetSubTotal(0)', 'readonly']) !!}
                                     <td>{!! Form::text('form_add_sub_total', old('form_add_sub_total'), ['class' => 'form-control text-right', 'id' => 'formSubTotal0', 'data-input-type' => 'number-format', 'readonly']) !!}</td>
                                     <td>{!! Form::text('form_add_total', old('form_add_total'), ['class' => 'form-control text-right', 'id' => 'formTotal0', 'data-input-type' => 'number-format', 'readonly']) !!}</td>
@@ -115,10 +117,11 @@
                                             </select>
                                         </div>
                                     </td>
-                                    <td>{!! Form::text('form_add_jumlah', old('form_add_jumlah'), ['class' => 'form-control text-center', 'id' => 'formJumlah0', 'data-input-type' => 'number-format', 'data-thousand-separator' => 'false',  'data-decimal-separator' => 'false', 'data-precision' => '0', 'onkeyup' => 'editJumlah(0)']) !!}</td>
-                                    <td>{!! Form::text('form_add_harga', old('form_add_harga'), ['class' => 'form-control text-right', 'id' => 'formHarga0', 'data-input-type' => 'number-format', 'ondblclick' => 'edit_harga(this, 0)', 'onkeyup' => 'produkSetSubTotal(0)', 'readonly']) !!}
-                                    <td>{!! Form::text('form_add_sub_total', old('form_add_sub_total'), ['class' => 'form-control text-right', 'id' => 'formSubTotal0', 'data-input-type' => 'number-format', 'readonly']) !!}</td>
-                                    <td>{!! Form::text('form_add_total', old('form_add_total'), ['class' => 'form-control text-right', 'id' => 'formTotal0', 'data-input-type' => 'number-format', 'readonly']) !!}</td>
+                                    <td>{!! Form::text('form_add_satuan', old('form_add_satuan'), ['class' => 'form-control', 'id' => 'formSatuan0', 'readonly']) !!}
+                                    <td>{!! Form::text('form_add_jumlah', NULL, ['class' => 'form-control text-center', 'id' => 'formJumlah0', 'data-input-type' => 'number-format', 'data-thousand-separator' => 'false',  'data-decimal-separator' => 'false', 'data-precision' => '1', 'onkeyup' => 'editJumlah(0)']) !!}</td>
+                                    <td>{!! Form::text('form_add_harga', NULL, ['class' => 'form-control text-right', 'id' => 'formHarga0', 'data-input-type' => 'number-format', 'ondblclick' => 'edit_harga(this, 0)', 'onkeyup' => 'produkSetSubTotal(0)', 'readonly']) !!}
+                                    <td>{!! Form::text('form_add_sub_total', NULL, ['class' => 'form-control text-right', 'id' => 'formSubTotal0', 'data-input-type' => 'number-format', 'readonly']) !!}</td>
+                                    <td>{!! Form::text('form_add_total', NULL, ['class' => 'form-control text-right', 'id' => 'formTotal0', 'data-input-type' => 'number-format', 'readonly']) !!}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary" onclick="formAddBarang()">
                                             <i class="fa fa-plus"></i></button>
@@ -140,7 +143,8 @@
                                                 </select>
                                             </div>
                                         </td>
-                                        <td>{!! Form::text('form_add_jumlah', old('form_add_jumlah'), ['class' => 'form-control text-center', 'id' => 'formJumlah0', 'data-input-type' => 'number-format', 'data-thousand-separator' => 'false',  'data-decimal-separator' => 'false', 'data-precision' => '0', 'onkeyup' => 'editJumlah(0)']) !!}</td>
+                                        <td>{!! Form::text('form_add_satuan', old('form_add_satuan'), ['class' => 'form-control', 'id' => 'formSatuan0', 'readonly']) !!}
+                                        <td>{!! Form::text('form_add_jumlah', old('form_add_jumlah'), ['class' => 'form-control text-center', 'id' => 'formJumlah0', 'data-input-type' => 'number-format', 'data-thousand-separator' => 'false',  'data-decimal-separator' => 'false', 'data-precision' => '1', 'onkeyup' => 'editJumlah(0)']) !!}</td>
                                         <td>{!! Form::text('form_add_harga', old('form_add_harga'), ['class' => 'form-control text-right', 'id' => 'formHarga0', 'data-input-type' => 'number-format', 'ondblclick' => 'edit_harga(this, 0)', 'onkeyup' => 'produkSetSubTotal(0)', 'readonly']) !!}
                                         <td>{!! Form::text('form_add_sub_total', old('form_add_sub_total'), ['class' => 'form-control text-right', 'id' => 'formSubTotal0', 'data-input-type' => 'number-format', 'readonly']) !!}</td>
                                         <td>{!! Form::text('form_add_total', old('form_add_total'), ['class' => 'form-control text-right', 'id' => 'formTotal0', 'data-input-type' => 'number-format', 'readonly']) !!}</td>
@@ -158,7 +162,7 @@
                                 <div class="card-body" style="height: 93px; background: #E5E5E5">
                                     <h3 class="text-black">Total</h3>
                                     <div class="text-right">
-                                        <h2 id="labelTotal" class="text-right text-black">Rp. 500.000,00</h2>
+                                        <h2 id="labelTotal0" class="text-right text-black"></h2>
                                     </div>
                                 </div>
                             </section>
@@ -167,7 +171,7 @@
                             <a href="{{ route('penjualan') }}">
                                 <button class="btn btn-secondary" type="button">Batal</button>
                             </a>
-                            <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#modal-dialog">
+                            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#modal-dialog">
                                 Pembayaran
                             </button>
                         </div>
@@ -223,57 +227,102 @@
 @endsection
 @push('js')
     <script>
+        var editJumlahTimeOut;
+
         function formAddBarang() {
             var idBarang = $('#formIdBarang0').val();
+            var satuan = $('#formSatuan0').val();
             var namaBarang = $('#formIdBarang0 option:selected').text();
-            var jumlah = $('#formJumlah0').val();
-            var harga = $('#formHarga0').val();
-            var subTotal = $('#formSubTotal0').val();
-            var total = $('#formTotal0').val();
+            var jumlah = $('#formJumlah0').val() || 1;
+            var harga = $('#formHarga0').val() || 0;
+            var subTotal = harga * jumlah;
+            var total = subTotal;
             if (!idBarang) {
                 alertDialog('Barang tidak boleh kosong');
                 return false;
             }
             if (jumlah == '' || jumlah == 0) {
-                alertDialog('Jumlah tidak boleh kosong')
+                alertDialog('Jumlah tidak boleh kosong');
                 return false;
             }
             if ($('tr[data-row-id="'+idBarang+'"]').length == 0) {
                 var html = `
-                <tr data-row-id="${idBarang}">
-                    <td> ${namaBarang} <input type="hidden" name="penjualan['${idBarang}'][id_barang]" id="formIdBarang${idBarang}" value="${idBarang}" onchange="barangSetHarga('${idBarang}')" </td>
-                    <td>
-                        <input type="text" name="penjualan['${idBarang}'][jumlah]" class="form-control text-center" id="formJumlah${idBarang}" data-input-type="number-format" data-thousand-separator="false" data-decimal-separator="false" data-precision="0" value="${jumlah}" /*onkeyup="editJumlah('${idBarang}')"*/>
-                    </td>
-                    <td><input type="text" name="penjualan['${idBarang}'][harga]" class="form-control text-right" id="formHarga${idBarang}" data-input-type="number-format" readonly></td>
-                    <td><input type="text" name="penjualan['${idBarang}'][sub_total]" class="form-control text-right" id="formSubTotal${idBarang}" data-input-type="number-format" readonly></td>
-                    <td><input type="text" name="penjualan['${idBarang}'][total]" class="form-control text-right" id="formTotal${idBarang}" data-input-type="number-format" readonly></td>
-                <td><button type="button" class="btn btn-danger" onclick="remove(${idBarang})"><i class="fa fa-trash"></i></button></td>
-                </tr>`;
+        <tr data-row-id="${idBarang}">
+            <td> ${namaBarang}
+                <input type="hidden" name="penjualan['${idBarang}'][id_barang]" id="formIdBarang${idBarang}" value="${idBarang}">
+            </td>
+            <td>
+                <input type="text" name="penjualan['${idBarang}'][satuan]" class="form-control" id="formSatuan${idBarang}"
+                    readonly value="${satuan}">
+            </td>
+            <td>
+                <input type="text" name="penjualan['${idBarang}'][jumlah]" class="form-control text-center" id="formJumlah${idBarang}"
+                    data-input-type="number-format" data-thousand-separator="false" data-decimal-separator="false"
+                    data-precision="0" value="${jumlah}">
+            </td>
+            <td>
+                <input type="text" name="penjualan['${idBarang}'][harga]" class="form-control text-right" id="formHarga${idBarang}"
+                    data-input-type="number-format" readonly value="${harga}">
+            </td>
+            <td>
+                <input type="text" name="penjualan['${idBarang}'][sub_total]" class="form-control text-right" id="formSubTotal${idBarang}"
+                    data-input-type="number-format" readonly value="${subTotal}">
+            </td>
+            <td>
+                <input type="text" name="penjualan['${idBarang}'][total]" class="form-control text-right" id="formTotal${idBarang}"
+                    data-input-type="number-format" readonly value="${total}">
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger" onclick="remove(${idBarang})"><i class="fa fa-trash"></i></button>
+            </td>
+        </tr>`;
                 $('#table tbody').append(html);
                 resetForm();
             } else {
                 confirmDialog('Produk sudah ada di dalam daftar', 'apakah anda ingin tetap menambahkannya?', function () {
                     var key = new Date().getTime();
                     var html = `
-                    <tr data-row-id="${key}">
-                        <td> ${namaBarang} <input type="hidden" name="penjualan['${key}'][id_barang]" id="formIdBarang${key}" value="${idBarang}"</td>
-                        <td>
-                            <input type="text" name="penjualan['${key}'][jumlah]" class="form-control text-center" id="formJumlah${key}" data-input-type="number-format" data-thousand-separator="false" data-decimal-separator="false" data-precision="0" value="${jumlah}" /*onkeyup="editJumlah('${idBarang}')"*/>
-                        </td>
-                        <td><input type="text" name="penjualan['${key}'][harga]" class="form-control text-right" id="formHarga${key}" data-input-type="number-format" readonly></td>
-                        <td><input type="text" name="penjualan['${key}'][sub_total]" class="form-control text-right" id="formSubTotal${key}" data-input-type="number-format" readonly></td>
-                        <td><input type="text" name="penjualan['${key}'][total]" class="form-control text-right" id="formTotal${key}" data-input-type="number-format" readonly></td>
-                        <td><button type="button" class="btn btn-danger" onclick="remove(${key})"><i class="fa fa-trash"></i></button></td>
-                    </tr>`;
+            <tr data-row-id="${key}">
+                <td> ${namaBarang}
+                    <input type="hidden" name="penjualan['${key}'][id_barang]" id="formIdBarang${key}" value="${idBarang}">
+                </td>
+                <td>
+                <input type="text" name="penjualan['${key}'][satuan]" class="form-control" id="formSatuan${key}"
+                    data-input-type="number-format" readonly value="${satuan}">
+                </td>
+                <td>
+                    <input type="text" name="penjualan['${key}'][jumlah]" class="form-control text-center" id="formJumlah${key}"
+                        data-input-type="number-format" data-thousand-separator="false" data-decimal-separator="false"
+                        data-precision="0" value="${jumlah}">
+                </td>
+                <td>
+                    <input type="text" name="penjualan['${key}'][harga]" class="form-control text-right" id="formHarga${key}"
+                        data-input-type="number-format" readonly value="${harga}">
+                </td>
+                <td>
+                    <input type="text" name="penjualan['${key}'][sub_total]" class="form-control text-right" id="formSubTotal${key}"
+                        data-input-type="number-format" readonly value="${subTotal}">
+                </td>
+                <td>
+                    <input type="text" name="penjualan['${key}'][total]" class="form-control text-right" id="formTotal${key}"
+                        data-input-type="number-format" readonly value="${total}">
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="remove(${key})"><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>`;
                     $('#table tbody').append(html);
                     resetForm();
-                })
+                });
             }
         }
 
-        function barangSetHarga(id = 0) {
-            var jumlah = $('#formJumlah'+id).val() > 0 ? $('#formJumlah'+id).val() : 1;
+        $('#formIdBarang0').change(function () {
+            $('#formJumlah0').val(1); // Set default jumlah = 1 saat pilih barang
+            barangSetHarga(0);
+        });
+
+        function barangSetHarga(id) {
             var tipePelanggan = $('#id_pelanggan option:selected').data('tipe');
             if ($('#formIdBarang'+id).val()) {
                 $('#table tbody').blockUI();
@@ -281,12 +330,12 @@
                     url: '<?php echo e(route('master.barang.harga')); ?>',
                     data: {
                         id_barang: $('#formIdBarang'+id).val(),
-                        jumlah: jumlah,
-                        tipe_pelanggan: $('#id_pelanggan option:selected').data('tipe')
+                        tipe_pelanggan: tipePelanggan
                     },
                     success: function (response) {
                         if (response.success) {
                             $('#formHarga'+id).val(response.harga);
+                            $('#formSatuan'+id).val(response.satuan);
                         } else {
                             toastr.error('Gagal mendapatkan harga');
                             resetHarga(id);
@@ -299,8 +348,24 @@
             }
         }
 
+        function barangSetSubTotal(id) {
+            var jumlah = parseFloat($('#formJumlah'+id).val()) || 0;
+            var harga = parseFloat($('#formHarga'+id).val()) || 0;
+            var subTotal = harga * jumlah;
+            $('#formSubTotal'+id).val(subTotal);
+            $('#formTotal'+id).val(subTotal);
+        }
+
+        function editJumlah(id) {
+            clearTimeout(editJumlahTimeOut);
+            editJumlahTimeOut = setTimeout(function () {
+                barangSetHarga(id);
+            }, 200);
+        }
+
         function resetForm() {
             $('#formIdBarang0').val('');
+            $('#formSatuan0').val('');
             $('#formJumlah0').val('');
             $('#formHarga0').val('');
             $('#formSubTotal0').val('');

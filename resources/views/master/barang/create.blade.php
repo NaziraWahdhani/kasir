@@ -39,25 +39,36 @@
                     <form action="{{ route('master.barang.store') }}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="kode_barang">Kode Barang</label>
                                     <input type="text" name="kode_barang" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="nama_barang">Nama Barang</label>
                                     <input type="text" name="nama_barang" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="id_kategori_barang">Kategori Barang</label>
                                     <select class="form-control" name="id_kategori_barang" id="id_kategori_barang">
                                         <option selected>Pilih</option>
                                         @foreach($kategoriBarang as $kategori)
                                             <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="id_satuan">Satuan</label>
+                                    <select class="form-control" name="id_satuan" id="id_satuan">
+                                        <option selected>Pilih</option>
+                                        @foreach($satuans as $satuan)
+                                            <option value="{{ $satuan->id }}">{{ $satuan->satuan }}</option>
                                         @endforeach
                                     </select>
                                 </div>

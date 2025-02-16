@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\KategoriBarang;
+use App\Models\Satuan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -17,8 +18,9 @@ class BarangController extends Controller
 
     public function create()
     {
+        $satuans = Satuan::all();
         $kategoriBarang = KategoriBarang::all();
-        return view('master.barang.create', compact('kategoriBarang'));
+        return view('master.barang.create', compact('kategoriBarang', 'satuans'));
     }
 
     public function store(Request $request)
@@ -35,6 +37,7 @@ class BarangController extends Controller
             'harga_jual_3' => 'required',
             'stok' => 'required|integer',
             'minimal_stok' => 'required|integer',
+            'id_satuan' => 'required|integer',
         ]);
 
         $harga_beli = $request->harga_beli;
@@ -53,7 +56,8 @@ class BarangController extends Controller
             'harga_jual_2' => $harga_jual_2,
             'harga_jual_3' => $harga_jual_3,
             'stok' => $request->stok,
-            'minimal_stok' => $request->minimal_stok
+            'minimal_stok' => $request->minimal_stok,
+            'id_satuan' => $request->id_satuan
         ]);
 
         return redirect()->route('master.barang')->with('success', 'Barang berhasil ditambahkan');
@@ -82,6 +86,7 @@ class BarangController extends Controller
             'harga_jual_3' => 'required',
             'stok' => 'required|integer',
             'minimal_stok' => 'required|integer',
+            'id_satuan' => 'required|integer',
         ]);
 
         $barang->update([
@@ -96,6 +101,7 @@ class BarangController extends Controller
             'harga_jual_3' => $request->harga_jual_3,
             'stok' => $request->stok,
             'minimal_stok' => $request->minimal_stok,
+            'id_satuan' => $request->id_satuan
         ]);
 
         return redirect()->route('master.barang')->with('success', 'Data barang berhasil diperbarui');
@@ -130,29 +136,33 @@ class BarangController extends Controller
         $request->validate([
             'id_barang' => 'required',
             'tipe_pelanggan' => 'required|in:vvip,vip,biasa',
-            'jumlah' => 'nullable|integer|min:1'
+            'jumlah' => 'nullable|integer|min:1',
         ]);
 
         $id_barang = $request->id_barang;
-        $tipe_pelanggan = strtolower($request->tipe_pelanggan); // Pastikan huruf kecil
+        $tipe_pelanggan = strtolower($request->tipe_pelanggan);
+        $jumlah = $request->jumlah ?? 1;
+
         $hargaBarang = Barang::find($id_barang);
 
         if (!$hargaBarang) {
             return response()->json(['success' => false, 'message' => 'Barang tidak ditemukan']);
         }
 
-        // Pilih harga berdasarkan tipe pelanggan
         $harga_jual = match ($tipe_pelanggan) {
             'vvip' => $hargaBarang->harga_jual_1,
             'vip' => $hargaBarang->harga_jual_2,
             'biasa' => $hargaBarang->harga_jual_3,
-            default => $hargaBarang->harga_jual_3, // Default ke harga biasa
+            default => $hargaBarang->harga_jual_3,
         };
 
         return response()->json([
             'success' => true,
-            'harga' => $harga_jual
+            'harga' => $harga_jual,
+            'jumlah' => $jumlah,
+            'satuan' => $hargaBarang->satuan->satuan,
         ]);
     }
+
 
 }
