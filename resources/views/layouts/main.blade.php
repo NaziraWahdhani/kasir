@@ -13,7 +13,7 @@
 
 <body class="theme-light preload-active aside-active aside-mobile-minimized aside-desktop-maximized" id="fullscreen">
 <div>
-    @include('layouts.sidebar.main')
+    {!! App\Library\Menu::load(1, 'layouts/sidebar/main') !!}
 </div>
 <div class="wrapper">
     @include('layouts.partials.header')

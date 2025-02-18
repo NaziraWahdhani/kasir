@@ -16,7 +16,7 @@
                 <div class="header-wrap">
                     <div class="dropdown ml-2">
                         <button class="btn btn-flat-primary widget13" data-toggle="dropdown">
-                            <div class="widget13-text"> Hi <strong>User</strong>
+                            <div class="widget13-text"> Hi <strong>{{ auth()->user()->name }}</strong>
                             </div>
                             <!-- BEGIN Avatar -->
                             <div class="avatar avatar-info widget13-avatar">
@@ -33,12 +33,6 @@
                                     <!-- BEGIN Rich List Item -->
                                     <div class="rich-list-item w-20 p-0">
                                         <div class="rich-list-content">
-                                            <div class="settings">
-                                                <a href="#" tabindex="0" target="_blank" role="menuitem" class="dropdown-item">
-                                                    <span class="dropdown-icon"><i data-feather="settings"></i></span>
-                                                    <span class="dropdown-content">Pengaturan</span>
-                                                </a>
-                                            </div>
                                             <div class="logout">
                                                 <form action="{{ route('logout') }}" method="post">
                                                     @csrf

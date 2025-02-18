@@ -69,7 +69,7 @@
                                     <td>{{ $data->role }}</td>
                                     <td>{{ $data->description }}</td>
                                     <td>
-                                        <button class="btn btn-primary"><i class="fa fa-lock"></i></button>
+                                        <a href="{{ route('pengaturan.user-roles.permission', ['id' => $data->id]) }}"><button type="button" class="btn btn-primary"><i class="fa fa-lock"></i></button></a>
                                     </td>
                                 </tr>
                                 @endforeach

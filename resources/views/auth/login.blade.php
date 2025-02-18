@@ -62,16 +62,6 @@
                                         </div>
                                     </div>
                                     <!-- END Form Group -->
-                                    <div class="d-flex align-items-center justify-content-between mb-3">
-                                        <!-- BEGIN Form Group -->
-                                        <div class="form-group mb-0">
-                                            <div class="custom-control custom-control-lg custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="remember" name="remember">
-                                                <label class="custom-control-label" for="remember">Remember me</label>
-                                            </div>
-                                        </div>
-                                        <!-- END Form Group -->
-                                    </div>
                                     <div class="d-flex align-items-center justify-content-end">
                                         <button type="submit" class="btn btn-label-primary btn-lg btn-widest">Login</button>
                                     </div>
