@@ -63,10 +63,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($user as $data)
                                 <tr>
-                                    <td>Nazira</td>
-                                    <td>Pemilik</td>
+                                    <td>{{ $data->name }}</td>
+                                    <td><span class="badge badge-primary">{{ $data->role->role }}</span></td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                             <!-- END Datatable -->

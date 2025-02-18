@@ -137,13 +137,14 @@ class BarangController extends Controller
             'id_barang' => 'required',
             'tipe_pelanggan' => 'required|in:vvip,vip,biasa',
             'jumlah' => 'nullable|integer|min:1',
+            'satuan' => 'nullable|integer|min:1',
         ]);
 
         $id_barang = $request->id_barang;
         $tipe_pelanggan = strtolower($request->tipe_pelanggan);
-        $jumlah = $request->jumlah ?? 1;
 
-        $hargaBarang = Barang::find($id_barang);
+
+        $hargaBarang = Barang::with('satuan')->find($id_barang);
 
         if (!$hargaBarang) {
             return response()->json(['success' => false, 'message' => 'Barang tidak ditemukan']);
@@ -155,14 +156,12 @@ class BarangController extends Controller
             'biasa' => $hargaBarang->harga_jual_3,
             default => $hargaBarang->harga_jual_3,
         };
+        $hargaBarang->harga_jual = $harga_jual;
 
         return response()->json([
             'success' => true,
-            'harga' => $harga_jual,
-            'jumlah' => $jumlah,
-            'satuan' => $hargaBarang->satuan->satuan,
+            'data' => $hargaBarang
         ]);
     }
-
 
 }

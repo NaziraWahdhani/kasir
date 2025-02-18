@@ -43,7 +43,9 @@
                                     <!-- END Avatar -->
                                 </div>
                                 <!-- BEGIN Form -->
-                                <form id="login-form">
+                                @include('layouts.partials.message')
+                                @include('layouts.partials.formRequestErrors')
+                                {!! Form::open(['route' => 'authenticate-laravel', 'method' => 'post']) !!}
                                     <!-- BEGIN Form Group -->
                                     <div class="form-group">
                                         <div class="float-label float-label-lg">
@@ -73,7 +75,7 @@
                                     <div class="d-flex align-items-center justify-content-end">
                                         <button type="submit" class="btn btn-label-primary btn-lg btn-widest">Login</button>
                                     </div>
-                                </form>
+                                {!! Form::close() !!}
                                 <!-- END Form -->
                             </div>
                         </div>

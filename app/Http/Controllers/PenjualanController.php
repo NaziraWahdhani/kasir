@@ -1,76 +1,95 @@
 <?php
 
-namespace App\Http\Controllers;
+    namespace App\Http\Controllers;
 
-use App\Models\Barang;
-use App\Models\Pelanggan;
-use App\Models\Penjualan;
-use App\Models\Satuan;
-use Illuminate\Http\Request;
+    use App\Models\Barang;
+    use App\Models\Pelanggan;
+    use App\Models\Penjualan;
+    use App\Models\PenjualanBarang;
+    use App\Models\Satuan;
+    use Carbon\Carbon;
+    use Illuminate\Http\Request;
+    use function Laravel\Prompts\alert;
 
-class PenjualanController extends Controller
-{
-    public function index()
+    class PenjualanController extends Controller
     {
-        return view('penjualan.index');
-    }
-
-    public function create()
-    {
-        $satuans = Satuan::all();
-        $pelanggan = Pelanggan::all();
-        $barang = Barang::all();
-        return view('penjualan.create', compact('pelanggan', 'barang', 'satuans'));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'id_pelanggan' => 'required',
-            'no_penjualan' => 'required',
-            'tanggal' => 'required|date',
-            'id_barang' => 'required',
-            'jumlah' => 'required|integer',
-            'diskon' => 'required',
-            'poin_digunakan' => 'nullable',
-            'ppn' => 'required',
-            'total' => 'required',
-            'bayar' => 'required',
-            'kembali' => 'nullable',
-            'created_by' => 'nullable',
-            'updated_by' => 'nullable'
-        ]);
-
-        $pelanggan = Pelanggan::findOrFail($request->id_pelanggan);
-        $barang = Barang::findOrFail($request->id_barang);
-
-        if ($pelanggan->tipe_pelanggan == 'VVIP') {
-            $harga_jual = $barang->harga_jual_1;
-        } elseif ($pelanggan->tipe_pelanggan == 'VIP') {
-            $harga_jual = $barang->harga_jual_2;
-        } elseif ($pelanggan->tipe_pelanggan == 'Biasa') {
-            $harga_jual = $barang->harga_jual_3;
+        public function index()
+        {
+            $penjualan = Penjualan::with('pelanggan', 'penjualanBarang.barang')->get();
+            return view('penjualan.index', compact('penjualan'));
         }
 
-        $subtotal = $harga_jual * $request->jumlah;
-        $total_setelah_diskon = $subtotal - $request->diskon;
-        $total = $total_setelah_diskon * 1.12;
+        public function create()
+        {
+            $satuans = Satuan::all();
+            $pelanggan = Pelanggan::all();
+            $barang = Barang::all();
+            return view('penjualan.create', compact('pelanggan', 'barang', 'satuans'));
+        }
 
-        Penjualan::create([
-            'id_pelanggan' => $request->id_pelanggan,
-            'no_penjualan' => $request->no_penjualan,
-            'tanggal' => $request->tanggal,
-            'id_barang' => $request->id_barang,
-            'jumlah' => $request->jumlah,
-            'subtotal' => $subtotal,
-            'diskon' => $request->diskon,
-            'poin_digunakan' => $request->poin_digunakan ?? 0,
-            'ppn' => $request->ppn,
-            'total' => $total,
-            'bayar' => $request->bayar,
-            'kembali' => $request->kembali ?? 0,
-        ]);
+        public function store(Request $request)
+        {
+            $request->validate([
+                'id_pelanggan' => 'required',
+                'no_penjualan' => 'required',
+                'tanggal' => 'required|date',
+                'diskon' => 'nullable',
+                'poin_digunakan' => 'nullable',
+                'ppn' => 'nullable|numeric|min:0|max:10',
+                'bayar' => 'required',
+                'kembali' => 'nullable',
+                'created_by' => 'nullable',
+                'updated_by' => 'nullable',
+                'penjualan_barang' => 'required|array|min:1'
+            ]);
 
+            $subtotal = 0;
+
+            foreach ($request->penjualan_barang as $penjualan_barang) {
+                $subtotal += $penjualan_barang['jumlah'] * $penjualan_barang['harga'];
+            }
+
+            $diskon = $request->diskon ? ($subtotal * $request->diskon) / 100 : 0;
+
+            $total_setelah_diskon = $subtotal - $diskon;
+            $total = $total_setelah_diskon * 1.12;
+            $kembali = $request->bayar - $total;
+
+            $penjualan = Penjualan::create([
+                'id_pelanggan' => $request->id_pelanggan,
+                'no_penjualan' => $request->no_penjualan,
+                'tanggal' => Carbon::now(),
+                'subtotal' => $subtotal,
+                'diskon' => $diskon,
+                'poin_digunakan' => $request->poin_digunakan ?? 0,
+                'ppn' => 1.12,
+                'total' => $total,
+                'bayar' => $request->bayar,
+                'kembali' => $kembali ?? 0,
+            ]);
+
+            $record_penjualan_barang = [];
+            foreach ($request->penjualan_barang as $penjualan_barang) {
+                $barang = Barang::find($penjualan_barang['id_barang']);
+
+                if ($barang) {
+                    $barang->stok -= $penjualan_barang['jumlah'];
+                    $barang->save();
+                }
+
+                $record_penjualan_barang[] = [
+                    'id_penjualan' => $penjualan->id,
+                    'id_barang' => $penjualan_barang['id_barang'],
+                    'id_satuan' => $penjualan_barang['id_satuan'],
+                    'jumlah' => $penjualan_barang['jumlah'],
+                    'harga' => $penjualan_barang['harga'],
+                    'sub_total' => $penjualan_barang['jumlah'] * $penjualan_barang['harga'],
+                    'total' => $penjualan_barang['total'],
+                ];
+            }
+
+            PenjualanBarang::insert($record_penjualan_barang);
+
+            return redirect()->route('penjualan')->with('success', 'Penjualan Berhasil Ditambahkan');
+        }
     }
-
-}

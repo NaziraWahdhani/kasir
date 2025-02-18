@@ -60,6 +60,7 @@
                                 <tr>
                                     <th>Role</th>
                                     <th>Description</th>
+                                    <th width="1"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -67,6 +68,9 @@
                                 <tr>
                                     <td>{{ $data->role }}</td>
                                     <td>{{ $data->description }}</td>
+                                    <td>
+                                        <button class="btn btn-primary"><i class="fa fa-lock"></i></button>
+                                    </td>
                                 </tr>
                                 @endforeach
                                 </tbody>

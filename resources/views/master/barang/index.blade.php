@@ -90,7 +90,8 @@
                                         <td>Rp. {{ number_format($data->harga_jual_3, 0, ',', '.') }}</td>
                                         <td class="d-flex">
                                             <a href="{{ route('master.barang.edit', ['id' => $data->id]) }}"><button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
-                                            <button class="btn btn-danger" data-id="{{ $data->id }}" onclick="alertDestroy({{ $data->id }})"><i class="fa fa-trash"></i></button>
+                                            @method('DELETE')
+                                            <button class="btn btn-danger delete-btn" data-id="{{ $data->id }}"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -106,3 +107,51 @@
     </div>
     <!-- END Page Content -->
 @endsection
+@push('js')
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Ambil semua tombol dengan class "delete-btn"
+            let deleteButtons = document.querySelectorAll(".delete-btn");
+            deleteButtons.forEach(function (button) {
+                button.addEventListener("click", function (event) {
+                    event.preventDefault(); // Mencegah link pindah halaman
+                    let id = this.getAttribute("data-id"); // Ambil ID dari tombol
+                    Swal.fire({
+                        title: "Apakah Anda yakin?",
+                        text: "Data akan dihapus secara permanen!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Ya, hapus!",
+                        cancelButtonText: "Batal"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Kirim permintaan DELETE ke server
+                            fetch(`/barang/delete/${id}`, {
+                                method: "DELETE",
+                                headers: {
+                                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                    "Content-Type": "application/json"
+                                }
+                            })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        Swal.fire("Berhasil!", data.message, "success").then(() => {
+                                            location.reload(); // Refresh halaman
+                                        });
+                                    } else {
+                                        Swal.fire("Gagal!", data.message, "error");
+                                    }
+                                })
+                                .catch(() => {
+                                    Swal.fire("Oops!", "Terjadi kesalahan saat menghapus data.", "error");
+                                });
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+@endpush

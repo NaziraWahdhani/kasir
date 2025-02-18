@@ -11,14 +11,12 @@
                         <div class="breadcrumb-icon">
                             <i data-feather="home"></i>
                         </div>
-                        <span class="breadcrumb-text">Dashboard</span>
-                    </a>
+                        <span class="breadcrumb-text">Dashboard</span> </a>
                     <div class="breadcrumb-item">
                         <span class="breadcrumb-text">Pengaturan</span>
                     </div>
                     <a href="{{ route('pengaturan.data-user') }}" class="breadcrumb-item">
-                        <span class="breadcrumb-text">Data User</span>
-                    </a>
+                        <span class="breadcrumb-text">Data User</span> </a>
                     <div class="breadcrumb-item">
                         <span class="breadcrumb-text">Create</span>
                     </div>
@@ -36,46 +34,119 @@
     <!-- END Header Holder -->
     <div class="content">
         <div class="container-fluid">
-            <div class="portlet">
-                <div class="portlet-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="nama">Nama</label>
-                                <input type="text" name="nama" class="form-control" id="nama" required>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form action="{{ route('pengaturan.data-user.store') }}" method="post">
+                @csrf
+                <div class="portlet">
+                    <div class="portlet-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Nama</label>
+                                    <input type="text" name="name" class="form-control" id="name" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <div class="input-group">
+                                        <input type="password" name="password" class="form-control" id="password" required>
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('password', 'togglePasswordIcon1')">
+                                                <i id="togglePasswordIcon1" class="fa fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="password_confirmation">Konfirmasi Password</label>
+                                    <div class="input-group">
+                                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('password_confirmation', 'togglePasswordIcon2')">
+                                                <i id="togglePasswordIcon2" class="fa fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{--<div class="col-6">
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="text" name="password" class="form-control" id="password" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="password_confirmation">Konfirmasi Password</label>
+                                    <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                </div>
+                            </div>--}}
+                            <div class="col-6">
+                                <label for="role_id">Hak Akses</label> <select class="form-control" name="role_id" id="role_id">
+                                    <option selected>Pilih</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}">{{ $role->role }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" class="form-control" id="email" required>
-                            </div>
+                        <div class="text-right">
+                            <a href="{{ route('pengaturan.data-user') }}">
+                                <button type="button" class="btn btn-secondary">Batal</button>
+                            </a>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="text" name="password" class="form-control" id="password" required>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <label for="hak_akses">Hak Akses</label>
-                            <select class="form-control" name="hak_akses" id="hak_akses">
-                                <option selected>Pilih</option>
-                                @foreach($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->role }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <a href="{{ route('pengaturan.data-user') }}">
-                            <button class="btn btn-secondary">Batal</button>
-                        </a> <a href="#">
-                            <button class="btn btn-primary">Tambah</button>
-                        </a>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        function togglePassword(inputId, iconId) {
+            var passwordInput = document.getElementById(inputId);
+            var icon = document.getElementById(iconId);
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            }
+        }
+
+        document.querySelector("form").addEventListener("submit", function (e) {
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("password_confirmation").value;
+
+            if (password !== confirmPassword) {
+                e.preventDefault(); // Mencegah submit
+                alert("Konfirmasi password tidak cocok!"); // Gantilah dengan SweetAlert jika perlu
+            }
+        });
+
+
+    </script>
+@endpush

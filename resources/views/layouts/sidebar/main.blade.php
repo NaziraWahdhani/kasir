@@ -111,7 +111,7 @@
                     <div class="menu-item">
                         <a href="{{ route('pengaturan.user-roles') }}" data-menu-path="/ltr/form/basic/base.html" class="menu-item-link">
                             <i class="menu-item-bullet"></i>
-                            <span class="menu-item-text">User Roles</span>
+                            <span class="menu-item-text">Roles</span>
                         </a>
                     </div>
                     <div class="menu-item">

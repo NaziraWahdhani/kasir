@@ -67,17 +67,19 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($laporanPenjualan as $laporan)
                                 <tr>
-                                    <td>1</td>
-                                    <td>nazira</td>
-                                    <td>12-12-2021</td>
-                                    <td>nazira</td>
-                                    <td>vvip</td>
-                                    <td>200.000</td>
-                                    <td>20.000</td>
-                                    <td>90</td>
-                                    <td>100.000</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>Kasir</td>
+                                    <td>{{ date('d-m-Y', strtotime($laporan->tanggal)) }}</td>
+                                    <td>{{ $laporan->pelanggan->nama }}</td>
+                                    <td>{{ $laporan->pelanggan->tipe_pelanggan }}</td>
+                                    <td>Rp. {{ number_format($laporan->subtotal, 0, ',', '.') }}</td>
+                                    <td>Rp. {{ number_format($laporan->diskon, 0, ',', '.') }}</td>
+                                    <td>{{ $laporan->poin_digunakan }}</td>
+                                    <td>Rp. {{ number_format($laporan->total, 0, ',', '.') }}</td>
                                 </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                             <!-- END Datatable -->

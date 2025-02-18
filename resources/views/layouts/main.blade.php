@@ -34,15 +34,15 @@
 <script type="text/javascript" src="{{ asset('assets/js/build.js') }}"></script>
 {{--<script type="text/javascript" src="{{ asset('assets/app/form/datepicker.js') }}"></script>--}}
 @stack('js')
-{{--<script>
+<script>
     $(document).ready(function () {
         $("#datepicker-1, #datepicker-2, #datepicker-3").datepicker({
-            dateFormat: "dd-mm-yyyy",
+            dateFormat: "YYYY-MM-DD",
             changeMonth: true,
             changeYear: true
         });
     });
-</script>--}}
+</script>
 </body>
 
 </html>

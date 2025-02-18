@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Penjualan;
 use Illuminate\Http\Request;
 
 class LaporanPenjualanController extends Controller
 {
     public function index()
     {
-        return view('laporan.penjualan.index');
+        $laporanPenjualan = Penjualan::with('pelanggan')->get();
+        return view('laporan.penjualan.index', compact('laporanPenjualan'));
     }
 }

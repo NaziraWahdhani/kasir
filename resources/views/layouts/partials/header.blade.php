@@ -40,10 +40,13 @@
                                                 </a>
                                             </div>
                                             <div class="logout">
-                                                <a href="#" tabindex="0" role="menuitem" class="dropdown-item">
+                                                <form action="{{ route('logout') }}" method="post">
+                                                    @csrf
+                                                <button type="submit" tabindex="0" role="menuitem" class="dropdown-item btn">
                                                     <span class="dropdown-icon"><i data-feather="log-out"></i></span>
                                                     <span class="dropdown-content">Keluar</span>
-                                                </a>
+                                                </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

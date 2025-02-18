@@ -21,11 +21,9 @@
                         <div class="breadcrumb-icon">
                             <i data-feather="home"></i>
                         </div>
-                        <span class="breadcrumb-text">Dashboard</span>
-                    </a>
+                        <span class="breadcrumb-text">Dashboard</span> </a>
                     <a href="{{ route('penjualan') }}" class="breadcrumb-item">
-                        <span class="breadcrumb-text">Penjualan</span>
-                    </a>
+                        <span class="breadcrumb-text">Penjualan</span> </a>
                 </div>
                 <!-- END Breadcrumb -->
             </div>
@@ -53,86 +51,52 @@
                         <div class="portlet-body">
                             <!-- BEGIN Datatable -->
                             <table id="datatable-1" class="table table-bordered table-striped table-hover">
-                                <thead>
+                                {{--<thead>
                                 <tr>
-                                    <th width="1">No</th>
+                                    <th>Tanggal</th>
                                     <th>Nama Pelanggan</th>
-                                    <th>Barang</th>
-                                    <th>Jumlah</th>
                                     <th>Total</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($penjualan as $data)
+                                    @php $rowspan = $data->penjualanBarang->count(); @endphp
+                                    @foreach($data->penjualanBarang as $index => $item)
+                                        <tr>
+                                            @if($index == 0)
+                                                <td rowspan="{{ $rowspan }}">{{ date('d-m-Y', strtotime($data->tanggal)) }}</td>
+                                                <td rowspan="{{ $rowspan }}">{{ $data->pelanggan->nama }}</td>
+                                            @endif
+                                            @if($index == 0)
+                                                <td rowspan="{{ $rowspan }}">{{ number_format($data->total, 0, ',', '.') }}</td>
+                                            @endif
+                                        </tr>
+                                    @endforeach
+                                @endforeach
+                                </tbody>--}}
+                                <thead>
                                 <tr>
-                                    <td>1</td>
-                                    <td>629047</td>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
+                                    <th>Tanggal</th>
+                                    <th>No Penjualan</th>
+                                    <th>Nama Pelanggan</th>
+                                    <th>Total</th>
+                                    <th width="1"></th>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>629547</td>
-                                    <td>Garrett Winters</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>129547</td>
-                                    <td>Ashton Cox</td>
-                                    <td>Junior Technical Author</td>
-                                    <td>San Francisco</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>129567</td>
-                                    <td>Cedric Kelly</td>
-                                    <td>Senior Javascript Developer</td>
-                                    <td>Edinburgh</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>429567</td>
-                                    <td>Airi Satou</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>829567</td>
-                                    <td>Brielle Williamson</td>
-                                    <td>Integration Specialist</td>
-                                    <td>New York</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>819067</td>
-                                    <td>Herrod Chandler</td>
-                                    <td>Sales Assistant</td>
-                                    <td>San Francisco</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>019067</td>
-                                    <td>Rhona Davidson</td>
-                                    <td>Integration Specialist</td>
-                                    <td>Tokyo</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td>815667</td>
-                                    <td>Colleen Hurst</td>
-                                    <td>Javascript Developer</td>
-                                    <td>San Francisco</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>815067</td>
-                                    <td>Sonya Frost</td>
-                                    <td>Software Engineer</td>
-                                    <td>Edinburgh</td>
-                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($penjualan as $data)
+                                    <tr>
+                                        <td>{{ date('d-m-Y', strtotime($data->tanggal)) }}</td>
+                                        <td>{{ $data->no_penjualan }}</td>
+                                        <td>{{ $data->pelanggan->nama }}</td>
+                                        <td>Rp. {{ number_format($data->total, 0, ',', '.') }}</td>
+                                        <td class="d-flex">
+                                            <a href="{{--{{ route('master.barang.edit', ['id' => $data->id]) }}--}}"><button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
+                                            @method('DELETE')
+                                            <button class="btn btn-danger delete-btn" data-id="{{ $data->id }}"><i class="fa fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                             <!-- END Datatable -->
