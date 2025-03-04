@@ -13,7 +13,7 @@ class Menu {
             ->get();
         $role_permissions = array();
         foreach ($rs_role_permissions as $r_role_permission) {
-            $role_permissions[$r_role_permission->module_feature_id] = $r_role_permission->permission;
+            $role_permissions[$r_role_permission->module_feature_action_id] = $r_role_permission->permission;
         }
 
         $rs_menus = ApplicationMenus::ViewNumberOfChild()
@@ -22,8 +22,8 @@ class Menu {
             ->get();
         $menus = array();
         foreach ($rs_menus as $r_menu) {
-            if ($r_menu->module_feature_id) {
-                if (isset($role_permissions[$r_menu->module_feature_id])) {
+            if ($r_menu->module_feature_action_id) {
+                if (isset($role_permissions[$r_menu->module_feature_action_id])) {
                     $menus[] = $r_menu;
                 }
             } else {

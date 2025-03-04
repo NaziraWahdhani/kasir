@@ -99,4 +99,51 @@ class RolesController extends Controller
             return redirect()->back()->with('error_message', $response['message']);
         }
     }
+
+    public function edit($id)
+    {
+        $data = Roles::findOrFail($id);
+
+        return view('pengaturan.user_roles.edit', compact('data'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = Roles::findOrFail($id);
+
+        $request->validate([
+            'role' => 'required|string',
+            'description' => 'required|string'
+        ]);
+
+        $data->update([
+            'role' => $request->role,
+            'description' => $request->description
+        ]);
+
+        return redirect()->route('pengaturan.user-roles');
+    }
+
+    public function delete($id)
+    {
+        $data = Roles::find($id);
+        if (!$data) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Barang tidak ditemukan'
+            ]);
+        }
+        try {
+            $data->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Barang berhasil dihapus'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menghapus data'
+            ]);
+        }
+    }
 }

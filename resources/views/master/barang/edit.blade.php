@@ -36,23 +36,25 @@
         <div class="container-fluid">
             <div class="portlet">
                 <div class="portlet-body">
+                    @include('layouts.partials.message')
+                    @include('layouts.partials.formRequestErrors')
                     <form action="{{ route('master.barang.update', $barang->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="kode_barang">Kode Barang</label>
                                     <input type="text" name="kode_barang" value="{{ $barang->kode_barang }}" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="nama_barang">Nama Barang</label>
                                     <input type="text" name="nama_barang" value="{{ $barang->nama_barang }}" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="id_kategori_barang">Kategori Barang</label>
                                     <select class="form-control" name="id_kategori_barang" id="id_kategori_barang">
@@ -67,13 +69,23 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
+                                    <label for="id_satuan">Satuan</label>
+                                    <select class="form-control" name="id_satuan" id="id_satuan">
+                                        <option selected>Pilih</option>
+                                        @foreach($satuans as $satuan)
+                                            <option value="{{ $satuan->id }}" {{ $barang->id_satuan == $satuan->id ? 'selected' : '' }}>
+                                                {{ $satuan->satuan }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
                                     <label>Tanggal Kedaluarsa</label>
                                     <div class="input-group">
-                                        <input name="tanggal_kedaluarsa" type="text" value="{{ $barang->tanggal_kedaluarsa }}" class="form-control" placeholder="Select date" id="datepicker-1">
+                                        <input name="tanggal_kedaluarsa" type="date" value="{{ $barang->tanggal_kedaluarsa }}" class="form-control" placeholder="Select date" id="datepicker-1">
                                         <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-calendar-alt"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -82,11 +94,8 @@
                                 <div class="form-group">
                                     <label>Tanggal Pembelian</label>
                                     <div class="input-group">
-                                        <input name="tanggal_pembelian" type="text" value="{{ $barang->tanggal_pembelian }}" class="form-control" placeholder="Select date" id="datepicker-2">
+                                        <input name="tanggal_pembelian" type="date" value="{{ $barang->tanggal_pembelian }}" class="form-control" placeholder="Select date" id="datepicker-2">
                                         <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-calendar-alt"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>

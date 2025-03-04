@@ -45,17 +45,32 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <!-- BEGIN Portlet -->
                     <div class="portlet">
                         <div class="portlet-header portlet-header-bordered">
                             <h3 class="portlet-title">Laporan Penjualan</h3>
                         </div>
                         <div class="portlet-body">
-                            <!-- BEGIN Datatable -->
-                            <table id="datatable-1" class="table table-bordered table-striped table-hover">
+                            <div class="form-inline my-3">
+                                <label class="mr-3">Periode</label>
+                                <div class="input-group">
+                                    {!! Form::date('tanggal_awal', date('01-m-Y'), ['class' => 'form-control', 'id' => 'tanggalAwal', 'data-input-type' => 'datepicker', 'autocomplete' => 'off']) !!}
+                                    <div class="input-group-append"></div>
+                                </div>
+                                <span class="mr-3 ml-3"> - </span>
+                                <div class="input-group">
+                                    {!! Form::date('tanggal_akhir', date('d-m-Y'), ['class' => 'form-control', 'id' => 'tanggalAkhir', 'data-input-type' => 'datepicker', 'autocomplete' => 'off']) !!}
+                                    <div class="input-group-append"></div>
+                                </div>
+                                <button type="button" class="btn btn-info ml-3" id="btnFilter" onclick="filter()">Filter</button>
+                                <div class="ml-auto">
+                                    <button type="button" id="btnExport" class="btn btn-success">Export Excel</button>
+                                    {{--{!! present()->button('cetak', 'Export Excel', 'cetak()', 'class="btn btn-success ml-2"') !!}--}}
+                                </div>
+                            </div>
+                            @include('layouts.partials.message')
+                            <table id="table" class="table table-bordered table-striped table-hover">
                                 <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Nama Kasir</th>
                                     <th>Tanggal & Waktu Transaksi</th>
                                     <th>Nama Pelanggan</th>
@@ -66,29 +81,46 @@
                                     <th>Total Akhir</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                @foreach($laporanPenjualan as $laporan)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>Kasir</td>
-                                    <td>{{ date('d-m-Y', strtotime($laporan->tanggal)) }}</td>
-                                    <td>{{ $laporan->pelanggan->nama }}</td>
-                                    <td>{{ $laporan->pelanggan->tipe_pelanggan }}</td>
-                                    <td>Rp. {{ number_format($laporan->subtotal, 0, ',', '.') }}</td>
-                                    <td>Rp. {{ number_format($laporan->diskon, 0, ',', '.') }}</td>
-                                    <td>{{ $laporan->poin_digunakan }}</td>
-                                    <td>Rp. {{ number_format($laporan->total, 0, ',', '.') }}</td>
-                                </tr>
-                                @endforeach
-                                </tbody>
+                                <tbody></tbody>
                             </table>
-                            <!-- END Datatable -->
                         </div>
                     </div>
-                    <!-- END Portlet -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- END Page Content -->
 @endsection
+@push('js')
+    <script>
+        var dataTable;
+        $(function() {
+            dataTable = $('#table').DataTable({
+                processing: true,
+                serverSide: true,
+                scrollX: true,
+                ajax: '',
+                columns: [
+                    {data: 'created_by', name: 'user.name'},
+                    {data: 'tanggal', name: 'penjualan.tanggal'},
+                    {data: 'nama_pelanggan', name: 'pelanggan.nama'},
+                    {data: 'tipe_pelanggan', name: 'pelanggan.tipe_pelanggan'},
+                    {data: 'subtotal', class: 'text-right'},
+                    {data: 'diskon', name: 'penjualan.diskon'},
+                    {data: 'poin_digunakan', name: 'penjualan.poin_digunakan'},
+                    {data: 'total', name: 'penjualan.total', class: 'text-right'},
+/*
+                    {data: '_', searchable: false, orderable: false, class: 'text-right nowrap'}
+*/
+                ]
+            });
+
+            $('#btnExport').click(function () {
+                document.location.href = '{{ route('laporan-penjualan.cetak') }}?tanggal_awal=' + $('#tanggalAwal').val() + '&tanggal_akhir=' + $('#tanggalAkhir').val();
+            })
+        });
+
+        function filter() {
+            dataTable.ajax.url('{{ route('laporan-penjualan') }}?tanggal_awal=' + $('#tanggalAwal').val() + '&tanggal_akhir=' + $('#tanggalAkhir').val()).load();
+        }
+    </script>
+@endpush

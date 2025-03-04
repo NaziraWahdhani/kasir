@@ -32,6 +32,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware([Authenticate::class])->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/data-penjualan', [DashboardController::class, 'getDataPenjualan']);
 
     Route::middleware(Authorization::class)->group(function() {
         Route::get('master/pelanggan', [PelangganController::class, 'index'])->name('master.pelanggan');
@@ -54,29 +55,44 @@ Route::middleware([Authenticate::class])->group(function() {
         Route::get('barang/edit/{id}', [BarangController::class, 'edit'])->name('master.barang.edit');
         Route::put('barang/update/{id}', [BarangController::class, 'update'])->name('master.barang.update');
         Route::delete('barang/delete/{id}', [BarangController::class, 'delete'])->name('master.barang.delete');
-        Route::get('master/barang/harga', [BarangController::class, 'harga'])->name('master.barang.harga');
 
         Route::get('master/satuan', [SatuanController::class, 'index'])->name('master.satuan');
         Route::get('master/satuan/cretae', [SatuanController::class, 'create'])->name('master.satuan.create');
         Route::post('tambah-satuan', [SatuanController::class, 'store'])->name('master.satuan.store');
+        Route::get('satuan/edit/{id}', [SatuanController::class, 'edit'])->name('master.satuan.edit');
+        Route::put('satuan/update/{id}', [SatuanController::class, 'update'])->name('master.satuan.update');
+        Route::delete('satuan/delete/{id}', [SatuanController::class, 'delete'])->name('master.satuan.delete');
+
 
         Route::get('penjualan', [PenjualanController::class, 'index'])->name('penjualan');
         Route::get('penjualan/create', [PenjualanController::class, 'create'])->name('penjualan.create');
         Route::post('tambah-penjualan', [PenjualanController::class, 'store'])->name('penjualan.store');
+        Route::get('nota/{id}', [PenjualanController::class, 'nota'])->name('penjualan.nota');
 
         Route::get('laporan-penjualan', [LaporanPenjualanController::class, 'index'])->name('laporan-penjualan');
+        Route::get('laporan-penjualan/cetak', [LaporanPenjualanController::class, 'cetak'])->name('laporan-penjualan.cetak');
 
         Route::get('laporan-stok', [LaporanStokController::class, 'index'])->name('laporan-stok');
+        Route::get('laporan-stok/cetak', [LaporanStokController::class, 'cetak'])->name('laporan-stok.cetak');
 
 
         Route::get('pengaturan/data-user', [UserController::class, 'index'])->name('pengaturan.data-user');
         Route::get('pengaturan/data-user/create', [UserController::class, 'create'])->name('pengaturan.data-user.create');
         Route::post('tambah-user', [UserController::class, 'store'])->name('pengaturan.data-user.store');
+        Route::get('data-user/edit/{id}', [UserController::class, 'edit'])->name('pengaturan.data-user.edit');
+        Route::put('data-user/update/{id}', [UserController::class, 'update'])->name('pengaturan.data-user.update');
+        Route::delete('data-user/delete/{id}', [UserController::class, 'delete'])->name('pengaturan.data-user.delete');
 
         Route::get('pengaturan/user-roles', [RolesController::class, 'index'])->name('pengaturan.user-roles');
         Route::get('pengaturan/user-roles/create', [RolesController::class, 'create'])->name('pengaturan.user-roles.create');
         Route::get('pengaturan/user-roles/permission/{id}', [RolesController::class, 'permission'])->name('pengaturan.user-roles.permission');
         Route::put('pengaturan/user-roles/permission/save/{id}', [RolesController::class, 'save'])->name('pengaturan.user-roles.permission.save');
         Route::post('tambah-user-roles', [RolesController::class, 'store'])->name('pengaturan.user-roles.store');
+        Route::get('user-roles/edit/{id}', [RolesController::class, 'edit'])->name('pengaturan.user-roles.edit');
+        Route::put('user-roles/update/{id}', [RolesController::class, 'update'])->name('pengaturan.user-roles.update');
+        Route::delete('user-roles/delete/{id}', [RolesController::class, 'delete'])->name('pengaturan.user-roles.delete');
     });
+
+    Route::get('master/barang/harga', [BarangController::class, 'harga'])->name('master.barang.harga');
+    Route::get('/pelanggan/{id}', [PelangganController::class, 'getPelanggan']);
 });

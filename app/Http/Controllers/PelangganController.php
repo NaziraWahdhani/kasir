@@ -41,6 +41,20 @@ class PelangganController extends Controller
         return redirect()->route('master.pelanggan')->with('success', 'Data pelanggan berhasil ditambah');
     }
 
+    public function getPelanggan($id)
+    {
+        $pelanggan = Pelanggan::find($id);
+
+        if ($pelanggan) {
+            return response()->json([
+                'tipe_pelanggan' => $pelanggan->tipe_pelanggan,
+                'poin_membership' => $pelanggan->poin_membership
+            ]);
+        }
+
+        return response()->json(null, 404);
+    }
+
     public function edit($id)
     {
         $pelanggan = Pelanggan::findOrFail($id);

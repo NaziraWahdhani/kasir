@@ -54,24 +54,34 @@
 {{--                            </a>--}}
                         </div>
                         <div class="portlet-body">
-                            <!-- BEGIN Datatable -->
-                            <table id="datatable-1" class="table table-bordered table-striped table-hover">
+                            <div class="form-inline my-3">
+                                <label class="mr-3">Periode</label>
+                                <div class="input-group">
+                                    {!! Form::date('tanggal_awal', date('01-m-Y'), ['class' => 'form-control', 'id' => 'tanggalAwal', 'data-input-type' => 'datepicker', 'autocomplete' => 'off']) !!}
+                                    <div class="input-group-append"></div>
+                                </div>
+                                <span class="mr-3 ml-3"> - </span>
+                                <div class="input-group">
+                                    {!! Form::date('tanggal_akhir', date('d-m-Y'), ['class' => 'form-control', 'id' => 'tanggalAkhir', 'data-input-type' => 'datepicker', 'autocomplete' => 'off']) !!}
+                                    <div class="input-group-append"></div>
+                                </div>
+                                <button type="button" class="btn btn-info ml-3" id="btnFilter" onclick="filter()">Filter</button>
+                                <div class="ml-auto">
+                                    <button type="button" id="btnExport" class="btn btn-success">Export Excel</button>
+                                    {{--{!! present()->button('cetak', 'Export Excel', 'cetak()', 'class="btn btn-success ml-2"') !!}--}}
+                                </div>
+                            </div>
+                            <table id="table" class="table table-bordered table-striped table-hover">
                                 <thead>
                                 <tr>
-                                    <th>No</th>
                                     <th>Barang</th>
                                     <th>Stok</th>
+                                    <th>Tanggal Pembelian</th>
+                                    <th>Tanggal Kedaluarsa</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>kayu</td>
-                                    <td>80</td>
-                                </tr>
-                                </tbody>
+                                <tbody></tbody>
                             </table>
-                            <!-- END Datatable -->
                         </div>
                     </div>
                     <!-- END Portlet -->
@@ -81,3 +91,33 @@
     </div>
     <!-- END Page Content -->
 @endsection
+@push('js')
+    <script>
+        var dataTable;
+        $(function() {
+            dataTable = $('#table').DataTable({
+                processing: true,
+                serverSide: true,
+                scrollX: true,
+                ajax: '',
+                columns: [
+                    {data: 'nama_barang', name: 'nama_barang'},
+                    {data: 'stok', name: 'stok'},
+                    {data: 'tanggal_pembelian', name: 'tanggal_pembelian'},
+                    {data: 'tanggal_kedaluarsa', name: 'tanggal_kedaluarsa'}
+                    /*
+                                        {data: '_', searchable: false, orderable: false, class: 'text-right nowrap'}
+                    */
+                ]
+            });
+
+            $('#btnExport').click(function () {
+                document.location.href = '{{ route('laporan-stok.cetak') }}?tanggal_awal=' + $('#tanggalAwal').val() + '&tanggal_akhir=' + $('#tanggalAkhir').val();
+            })
+        });
+
+        function filter() {
+            dataTable.ajax.url('{{ route('laporan-stok') }}?tanggal_awal=' + $('#tanggalAwal').val() + '&tanggal_akhir=' + $('#tanggalAkhir').val()).load();
+        }
+    </script>
+@endpush

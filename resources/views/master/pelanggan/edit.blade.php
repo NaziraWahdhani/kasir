@@ -36,6 +36,8 @@
         <div class="container-fluid">
             <div class="portlet">
                 <div class="portlet-body">
+                    @include('layouts.partials.message')
+                    @include('layouts.partials.formRequestErrors')
                     <form action="{{ route('master.pelanggan.update', $pelanggan->id) }}" method="post">
                         @csrf
                         @method('PUT')
@@ -73,9 +75,9 @@
                                     <label for="tipe_pelanggan">Tipe Pelanggan</label>
                                     <select class="form-control" name="tipe_pelanggan" id="tipe_pelanggan" required>
                                         <option value="" disabled {{ empty($pelanggan->tipe_pelanggan) ? 'selected' : '' }}>Pilih</option>
-                                        <option value="VVIP" {{ old('tipe_pelanggan', $pelanggan->tipe_pelanggan ?? '') == 'VVIP' ? 'selected' : '' }}>VVIP</option>
-                                        <option value="VIP" {{ old('tipe_pelanggan', $pelanggan->tipe_pelanggan ?? '') == 'VIP' ? 'selected' : '' }}>VIP</option>
-                                        <option value="Biasa" {{ old('tipe_pelanggan', $pelanggan->tipe_pelanggan ?? '') == 'Biasa' ? 'selected' : '' }}>Biasa</option>
+                                        <option value="vvip" {{ old('tipe_pelanggan', $pelanggan->tipe_pelanggan ?? '') == 'vvip' ? 'selected' : '' }}>vvip</option>
+                                        <option value="vip" {{ old('tipe_pelanggan', $pelanggan->tipe_pelanggan ?? '') == 'vip' ? 'selected' : '' }}>vip</option>
+                                        <option value="biasa" {{ old('tipe_pelanggan', $pelanggan->tipe_pelanggan ?? '') == 'biasa' ? 'selected' : '' }}>biasa</option>
                                     </select>
                                 </div>
                             </div>

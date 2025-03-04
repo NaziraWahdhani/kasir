@@ -38,6 +38,8 @@
         <div class="container-fluid">
             <div class="portlet">
                 <div class="portlet-body">
+                    @include('layouts.partials.message')
+                    @include('layouts.partials.formRequestErrors')
                     <form action="{{ route('pengaturan.user-roles.store') }}" method="post">
                         @csrf
                     <div class="row">
@@ -56,7 +58,7 @@
                     </div>
                     <div class="text-right">
                         <a href="{{ route('pengaturan.user-roles') }}">
-                            <button type="button" class="btn btn-secondary">Batal</button>
+                            <button type="button" class="btn btn-secondary">Kembali</button>
                         </a>
                         <button type="submit" class="btn btn-primary">Tambah</button>
                     </div>

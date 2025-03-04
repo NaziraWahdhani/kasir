@@ -36,28 +36,29 @@
         <div class="container-fluid">
             @include('layouts.partials.message')
             @include('layouts.partials.formRequestErrors')
-            <form action="{{ route('pengaturan.data-user.store') }}" method="post">
+            <form action="{{ route('pengaturan.data-user.update', $data->id) }}" method="post">
                 @csrf
+                @method('PUT')
                 <div class="portlet">
                     <div class="portlet-body">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="name">Nama</label>
-                                    <input type="text" name="name" class="form-control" id="name" required>
+                                    <input type="text" name="name" value="{{ $data->name }}" class="form-control" id="name" required>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" name="email" class="form-control" id="email" required>
+                                    <input type="email" name="email" value="{{ $data->email }}" class="form-control" id="email" required>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <div class="input-group">
-                                        <input type="password" name="password" class="form-control" id="password" required>
+                                        <input type="password" name="password" value="{{ $data->password }}" class="form-control" id="password" required>
                                         <div class="input-group-append">
                                             <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('password', 'togglePasswordIcon1')">
                                                 <i id="togglePasswordIcon1" class="fa fa-eye"></i>
@@ -70,7 +71,7 @@
                                 <div class="form-group">
                                     <label for="password_confirmation">Konfirmasi Password</label>
                                     <div class="input-group">
-                                        <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                        <input type="password" name="password_confirmation" value="{{ $data->password }}" class="form-control" id="password_confirmation" required>
                                         <div class="input-group-append">
                                             <button type="button" class="btn btn-outline-secondary" onclick="togglePassword('password_confirmation', 'togglePasswordIcon2')">
                                                 <i id="togglePasswordIcon2" class="fa fa-eye"></i>
@@ -84,16 +85,18 @@
                                 <label for="role_id">Hak Akses</label> <select class="form-control" name="role_id" id="role_id">
                                     <option selected>Pilih</option>
                                     @foreach($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->role }}</option>
+                                        <option value="{{ $role->id }}" {{ $data->role_id == $role->id ? 'selected' : '' }}>
+                                            {{ $role->role }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="text-right">
                             <a href="{{ route('pengaturan.data-user') }}">
-                                <button type="button" class="btn btn-secondary">Kembali</button>
+                                <button type="button" class="btn btn-secondary">Batal</button>
                             </a>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </div>
                 </div>

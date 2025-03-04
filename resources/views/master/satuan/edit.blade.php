@@ -2,7 +2,7 @@
 @section('content')
     <div class="header-holder header-holder-desktop">
         <div class="header-container container-fluid">
-            <h4 class="header-title">Kategori Barang</h4>
+            <h4 class="header-title">Satuan</h4>
             <i class="header-divider"></i>
             <div class="header-wrap header-wrap-block justify-content-start">
                 <!-- BEGIN Breadcrumb -->
@@ -16,11 +16,11 @@
                     <div class="breadcrumb-item">
                         <span class="breadcrumb-text">Master</span>
                     </div>
-                    <a href="{{ route('master.kategori-barang') }}" class="breadcrumb-item">
-                        <span class="breadcrumb-text">Kategori Barang</span>
+                    <a href="{{ route('master.satuan') }}" class="breadcrumb-item">
+                        <span class="breadcrumb-text">Satuan</span>
                     </a>
                     <div class="breadcrumb-item">
-                        <span class="breadcrumb-text">Edit</span>
+                        <span class="breadcrumb-text">Create</span>
                     </div>
                 </div>
                 <!-- END Breadcrumb -->
@@ -39,25 +39,19 @@
                 <div class="portlet-body">
                     @include('layouts.partials.message')
                     @include('layouts.partials.formRequestErrors')
-                    <form action="{{ route('master.kategori-barang.update', $kategoriBarang->id) }}" method="post">
+                    <form action="{{ route('master.satuan.update', $satuan->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="form-group">
-                                    <label for="kode_kategori">Kode Kategori</label>
-                                    <input type="text" name="kode_kategori" value="{{ $kategoriBarang->kode_kategori }}" class="form-control" id="kode_kategori" required>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="nama_kategori">Nama Kategori</label>
-                                    <input type="text" name="nama_kategori" value="{{ $kategoriBarang->nama_kategori }}" class="form-control" id="nama_kategori" required>
+                                    <label for="satuan">Satuan</label>
+                                    <input type="text" name="satuan" value="{{ $satuan->satuan }}" class="form-control" id="satuan" required>
                                 </div>
                             </div>
                         </div>
                         <div class="text-right">
-                            <a href="{{ route('master.kategori-barang') }}">
+                            <a href="{{ route('master.satuan') }}">
                                 <button class="btn btn-secondary" type="button">Batal</button>
                             </a>
                             <button class="btn btn-primary" type="submit">Update</button>

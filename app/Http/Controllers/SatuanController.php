@@ -28,4 +28,42 @@ class SatuanController extends Controller
 
         return redirect()->route('master.satuan')->with('success', 'Data berhasil ditambah');
     }
+
+    public function edit($id)
+    {
+        $satuan = Satuan::findOrFail($id);
+        return view('master.satuan.edit', compact('satuan'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $satuan = Satuan::findOrFail($id);
+
+        $satuan->update($request->all());
+        return redirect()->route('master.satuan')->with('success', 'Data berhasil diupdate');
+    }
+
+    public function delete($id)
+    {
+        $satuan = Satuan::find($id);
+        if (!$satuan) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Kategori Barang tidak ditemukan'
+            ]);
+        }
+
+        try {
+            $satuan->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Kategori Barang berhasil dihapus'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menghapus data'
+            ]);
+        }
+    }
 }

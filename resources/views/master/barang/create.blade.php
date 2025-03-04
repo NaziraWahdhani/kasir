@@ -36,6 +36,8 @@
         <div class="container-fluid">
             <div class="portlet">
                 <div class="portlet-body">
+                    @include('layouts.partials.message')
+                    @include('layouts.partials.formRequestErrors')
                     <form action="{{ route('master.barang.store') }}" method="post">
                         @csrf
                         <div class="row">
@@ -77,11 +79,8 @@
                                 <div class="form-group">
                                     <label>Tanggal Kedaluarsa</label>
                                     <div class="input-group">
-                                        <input name="tanggal_kedaluarsa" type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-1">
+                                        <input name="tanggal_kedaluarsa" type="date" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-1">
                                         <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-calendar-alt"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -90,11 +89,8 @@
                                 <div class="form-group">
                                     <label>Tanggal Pembelian</label>
                                     <div class="input-group">
-                                        <input name="tanggal_pembelian" type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-2">
+                                        <input name="tanggal_pembelian" type="date" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-2">
                                         <div class="input-group-append">
-                                        <span class="input-group-text">
-                                            <i class="fa fa-calendar-alt"></i>
-                                        </span>
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +134,7 @@
                         </div>
                         <div class="text-right">
                             <a href="{{ route('master.barang') }}">
-                                <button class="btn btn-secondary" type="button">Batal</button>
+                                <button class="btn btn-secondary" type="button">Kembali</button>
                             </a>
                             <button class="btn btn-primary" type="submit">Tambah</button>
                         </div>

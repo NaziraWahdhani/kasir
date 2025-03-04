@@ -21,8 +21,10 @@ class KategoriBarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_kategori' => 'required|string|max:255',
+            'kode_kategori' => 'required|string|max:255|unique:kategori_barang,kode_kategori',
             'nama_kategori' => 'required|string|max:255',
+        ], [
+            'kode_kategori.unique' => 'Kode kategori sudah digunakan. Silakan gunakan kode lain.',
         ]);
 
         KategoriBarang::create([
@@ -44,16 +46,14 @@ class KategoriBarangController extends Controller
         $kategoriBarang = KategoriBarang::findOrFail($id);
 
         $request->validate([
-            'kode_kategori' => 'required|string|max:255',
             'nama_kategori' => 'required|string|max:255',
         ]);
 
         $kategoriBarang->update([
-            'kode_kategori' => $request->kode_kategori,
             'nama_kategori' => $request->nama_kategori,
         ]);
 
-        return redirect()->route('master.kategori-barang')->with('success', 'Data kategori barang berhasil diperbarui');
+        return redirect()->route('master.kategori-barang');
     }
 
     public function delete($id)

@@ -2,7 +2,7 @@
 @section('content')
     <div class="header-holder header-holder-desktop">
         <div class="header-container container-fluid">
-            <h4 class="header-title">Kategori Barang</h4>
+            <h4 class="header-title">User Roles</h4>
             <i class="header-divider"></i>
             <div class="header-wrap header-wrap-block justify-content-start">
                 <!-- BEGIN Breadcrumb -->
@@ -14,13 +14,13 @@
                         <span class="breadcrumb-text">Dashboard</span>
                     </a>
                     <div class="breadcrumb-item">
-                        <span class="breadcrumb-text">Master</span>
+                        <span class="breadcrumb-text">Pengaturan</span>
                     </div>
-                    <a href="{{ route('master.kategori-barang') }}" class="breadcrumb-item">
-                        <span class="breadcrumb-text">Kategori Barang</span>
+                    <a href="{{ route('pengaturan.user-roles') }}" class="breadcrumb-item">
+                        <span class="breadcrumb-text">Role</span>
                     </a>
                     <div class="breadcrumb-item">
-                        <span class="breadcrumb-text">Edit</span>
+                        <span class="breadcrumb-text">Create</span>
                     </div>
                 </div>
                 <!-- END Breadcrumb -->
@@ -33,39 +33,39 @@
             </div>
         </div>
     </div>
+    <!-- END Header Holder -->
     <div class="content">
         <div class="container-fluid">
             <div class="portlet">
                 <div class="portlet-body">
                     @include('layouts.partials.message')
                     @include('layouts.partials.formRequestErrors')
-                    <form action="{{ route('master.kategori-barang.update', $kategoriBarang->id) }}" method="post">
+                    <form action="{{ route('pengaturan.user-roles.update', $data->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="kode_kategori">Kode Kategori</label>
-                                    <input type="text" name="kode_kategori" value="{{ $kategoriBarang->kode_kategori }}" class="form-control" id="kode_kategori" required>
+                                    <label for="role">role</label>
+                                    <input type="text" name="role" value="{{ $data->role }}" class="form-control" id="role" required>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="nama_kategori">Nama Kategori</label>
-                                    <input type="text" name="nama_kategori" value="{{ $kategoriBarang->nama_kategori }}" class="form-control" id="nama_kategori" required>
+                                    <label for="description">description</label>
+                                    <input type="text" name="description" value="{{ $data->description }}" class="form-control" id="description" required>
                                 </div>
                             </div>
                         </div>
                         <div class="text-right">
-                            <a href="{{ route('master.kategori-barang') }}">
-                                <button class="btn btn-secondary" type="button">Batal</button>
+                            <a href="{{ route('pengaturan.user-roles') }}">
+                                <button type="button" class="btn btn-secondary">Batal</button>
                             </a>
-                            <button class="btn btn-primary" type="submit">Update</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

@@ -26,7 +26,7 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kode_barang' => 'required|string|max:255',
+            'kode_barang' => 'required|string|max:255|unique:barang,kode_barang',
             'nama_barang' => 'required|string|max:255',
             'id_kategori_barang' => 'required|integer',
             'tanggal_kedaluarsa' => 'required|date',
@@ -38,6 +38,8 @@ class BarangController extends Controller
             'stok' => 'required|integer',
             'minimal_stok' => 'required|integer',
             'id_satuan' => 'required|integer',
+        ], [
+            'kode_barang.unique' => 'Kode barang sudah digunakan. Silakan gunakan kode lain.',
         ]);
 
         $harga_beli = $request->harga_beli;
@@ -49,8 +51,8 @@ class BarangController extends Controller
             'id_kategori_barang' => $request->id_kategori_barang,
             'kode_barang' => $request->kode_barang,
             'nama_barang' => $request->nama_barang,
-            'tanggal_kedaluarsa' => Carbon::createFromFormat('m/d/Y', $request->tanggal_kedaluarsa)->format('Y-m-d'),
-            'tanggal_pembelian' => Carbon::createFromFormat('m/d/Y', $request->tanggal_pembelian)->format('Y-m-d'),
+            'tanggal_kedaluarsa' => Carbon::now(),
+            'tanggal_pembelian' => Carbon::now(),
             'harga_beli' => $harga_beli,
             'harga_jual_1' => $harga_jual_1,
             'harga_jual_2' => $harga_jual_2,
@@ -67,7 +69,8 @@ class BarangController extends Controller
     {
         $barang = Barang::findOrFail($id);
         $kategoriBarang = KategoriBarang::all();
-        return view('master.barang.edit', compact('barang', 'kategoriBarang'));
+        $satuans = Satuan::all();
+        return view('master.barang.edit', compact('barang', 'kategoriBarang', 'satuans'));
     }
 
     public function update(Request $request, $id)
@@ -75,7 +78,6 @@ class BarangController extends Controller
         $barang = Barang::findOrFail($id);
 
         $request->validate([
-            'kode_barang' => 'required|string|max:255',
             'nama_barang' => 'required|string|max:255',
             'id_kategori_barang' => 'required|integer',
             'tanggal_kedaluarsa' => 'required|date',
@@ -90,7 +92,6 @@ class BarangController extends Controller
         ]);
 
         $barang->update([
-            'kode_barang' => $request->kode_barang,
             'nama_barang' => $request->nama_barang,
             'id_kategori_barang' => $request->id_kategori_barang,
             'tanggal_kedaluarsa' => $request->tanggal_kedaluarsa,

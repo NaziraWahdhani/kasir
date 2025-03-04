@@ -37,6 +37,8 @@
         <div class="container-fluid">
             <div class="portlet">
                 <div class="portlet-body">
+                    @include('layouts.partials.message')
+                    @include('layouts.partials.formRequestErrors')
                     <form action="{{ route('master.satuan.store') }}" method="post">
                         @csrf
                         <div class="row">
@@ -49,7 +51,7 @@
                         </div>
                         <div class="text-right">
                             <a href="{{ route('master.satuan') }}">
-                                <button class="btn btn-secondary" type="button">Batal</button>
+                                <button class="btn btn-secondary" type="button">Kembali</button>
                             </a>
                             <button class="btn btn-primary" type="submit">Tambah</button>
                         </div>

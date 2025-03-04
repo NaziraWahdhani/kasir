@@ -51,33 +51,9 @@
                         <div class="portlet-body">
                             <!-- BEGIN Datatable -->
                             <table id="datatable-1" class="table table-bordered table-striped table-hover">
-                                {{--<thead>
-                                <tr>
-                                    <th>Tanggal</th>
-                                    <th>Nama Pelanggan</th>
-                                    <th>Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($penjualan as $data)
-                                    @php $rowspan = $data->penjualanBarang->count(); @endphp
-                                    @foreach($data->penjualanBarang as $index => $item)
-                                        <tr>
-                                            @if($index == 0)
-                                                <td rowspan="{{ $rowspan }}">{{ date('d-m-Y', strtotime($data->tanggal)) }}</td>
-                                                <td rowspan="{{ $rowspan }}">{{ $data->pelanggan->nama }}</td>
-                                            @endif
-                                            @if($index == 0)
-                                                <td rowspan="{{ $rowspan }}">{{ number_format($data->total, 0, ',', '.') }}</td>
-                                            @endif
-                                        </tr>
-                                    @endforeach
-                                @endforeach
-                                </tbody>--}}
                                 <thead>
                                 <tr>
                                     <th>Tanggal</th>
-                                    <th>No Penjualan</th>
                                     <th>Nama Pelanggan</th>
                                     <th>Total</th>
                                     <th width="1"></th>
@@ -86,14 +62,12 @@
                                 <tbody>
                                 @foreach($penjualan as $data)
                                     <tr>
-                                        <td>{{ date('d-m-Y', strtotime($data->tanggal)) }}</td>
-                                        <td>{{ $data->no_penjualan }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d-m-Y') }}</td>
                                         <td>{{ $data->pelanggan->nama }}</td>
                                         <td>Rp. {{ number_format($data->total, 0, ',', '.') }}</td>
                                         <td class="d-flex">
-                                            <a href="{{--{{ route('master.barang.edit', ['id' => $data->id]) }}--}}"><button type="button" class="btn btn-warning"><i class="fa fa-edit"></i></button></a>
-                                            @method('DELETE')
-                                            <button class="btn btn-danger delete-btn" data-id="{{ $data->id }}"><i class="fa fa-trash"></i></button>
+                                            <a href="{{ route('penjualan.nota', $data->id) }}" target="_blank"><button type="button" class="btn btn-info"><i class="fa fa-file"></i></button></a>
+
                                         </td>
                                     </tr>
                                 @endforeach

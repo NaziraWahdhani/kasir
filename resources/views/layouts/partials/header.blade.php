@@ -5,12 +5,12 @@
             <div class="header-container container-fluid">
                 <div class="header-wrap header-wrap-block">
                     <!-- BEGIN Input Group -->
-                    <div class="input-group-icon input-group-lg widget15-compact">
+                    {{--<div class="input-group-icon input-group-lg widget15-compact">
                         <div class="input-group-prepend">
                             <i class="fa fa-search text-primary"></i>
                         </div>
                         <input type="text" class="form-control" placeholder="Type to search...">
-                    </div>
+                    </div>--}}
                     <!-- END Input Group -->
                 </div>
                 <div class="header-wrap">

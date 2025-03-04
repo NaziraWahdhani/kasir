@@ -14,12 +14,17 @@ class Penjualan extends Model
 
     public function penjualanBarang()
     {
-        return $this->HasMany(PenjualanBarang::class, 'id_penjualan');
+        return $this->hasMany(PenjualanBarang::class, 'id_penjualan');
     }
 
     public function pelanggan()
     {
         return $this->belongsTo(Pelanggan::class, 'id_pelanggan');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 
 }
