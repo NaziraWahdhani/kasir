@@ -78,21 +78,41 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Tanggal Kedaluarsa</label>
-                                    <div class="input-group">
+                                    <div class="form-group">
+										<div class="input-group">
+											<input name="tanggal_kedaluarsa" type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-4">
+											<div class="input-group-append">
+												<span class="input-group-text">
+													<i class="fa fa-calendar-alt"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+                                    <!-- <div class="input-group">
                                         <input name="tanggal_kedaluarsa" type="date" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-1">
                                         <div class="input-group-append">
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Tanggal Pembelian</label>
-                                    <div class="input-group">
+                                    <div class="form-group">
+										<div class="input-group">
+											<input name="tanggal_pembelian" type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-4">
+											<div class="input-group-append">
+												<span class="input-group-text">
+													<i class="fa fa-calendar-alt"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+                                    <!-- <div class="input-group">
                                         <input name="tanggal_pembelian" type="date" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-2">
                                         <div class="input-group-append">
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-6">

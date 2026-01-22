@@ -31,11 +31,11 @@ class DashboardController extends Controller
     public function getDataPenjualan()
     {
         $penjualanPerHari = Penjualan::select(
-            DB::raw('DATE(created_at) as tanggal'),
+            DB::raw('DATE(tanggal) as tanggal'),
             DB::raw('SUM(total) as total_penjualan')
         )
-            ->where('created_at', '>=', Carbon::now()->subDays(6))
-            ->groupBy(DB::raw('DATE(created_at)'))
+            ->where('tanggal', '>=', Carbon::now()->subDays(6))
+            ->groupBy(DB::raw('DATE(tanggal)'))
             ->orderBy('tanggal', 'asc')
             ->get();
 

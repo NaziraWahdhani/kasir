@@ -53,7 +53,7 @@
                                     <!-- BEGIN Avatar -->
                                     <div class="avatar avatar-label-primary avatar-circle widget8-avatar m-0">
                                         <div class="avatar-display">
-                                            <i class="fa fa-boxes"></i>
+                                            <i class="fa-brands fa-sellsy"></i>
                                         </div>
                                     </div>
                                     <!-- END Avatar -->
@@ -68,7 +68,7 @@
                                     <!-- BEGIN Avatar -->
                                     <div class="avatar avatar-label-success avatar-circle widget8-avatar m-0">
                                         <div class="avatar-display">
-                                            <i class="fa fa-users"></i>
+                                            <i class="fa fa-boxes"></i>
                                         </div>
                                     </div>
                                     <!-- END Avatar -->
@@ -83,7 +83,7 @@
                                     <!-- BEGIN Avatar -->
                                     <div class="avatar avatar-label-danger avatar-circle widget8-avatar m-0">
                                         <div class="avatar-display">
-                                            <i class="fa fa-link"></i>
+                                            <i class="fa fa-users"></i>
                                         </div>
                                     </div>
                                     <!-- END Avatar -->
@@ -165,13 +165,15 @@
                     var labels = response.labels;
                     var dataValues = response.data;
 
+                    var totalMingguan = dataValues.reduce((a,b) => a + b, 0)
+
                     var ctx = document.getElementById("chartLine").getContext("2d");
                     new Chart(ctx, {
                         type: "line",
                         data: {
                             labels: labels,
                             datasets: [{
-                                label: "Total Penjualan (Rp)",
+                                label: "Total Penjualan (Rp. " + totalMingguan.toLocaleString("id-ID") + ")",
                                 data: dataValues,
                                 borderColor: "rgba(75, 192, 192, 1)",
                                 backgroundColor: "rgba(75, 192, 192, 0.2)",

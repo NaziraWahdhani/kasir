@@ -61,9 +61,11 @@
 
             $poin_membership = ($total * 2) /100;
 
+            $tanggal = Carbon::createFromFormat('m/d/Y', $request->tanggal)->format('Y-m-d');
+
             $penjualan = Penjualan::create([
                 'id_pelanggan' => $request->id_pelanggan,
-                'tanggal' => Carbon::now(),
+                'tanggal' => $tanggal,
                 'subtotal' => $subtotal,
                 'diskon' => $diskon,
                 'poin_digunakan' => $poin_digunakan,

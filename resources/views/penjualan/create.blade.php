@@ -56,10 +56,16 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Tanggal</label>
-                                    <div class="input-group">
-                                        <input name="tanggal" type="date" class="form-control datepicker" placeholder="dd/mm/yyyy">
-                                        <div class="input-group-append"></div>
-                                    </div>
+                                    <div class="form-group">
+											<div class="input-group">
+											<input name="tanggal" type="text" class="form-control" placeholder="dd/mm/yyyy" id="datepicker-4">
+											<div class="input-group-append">
+												<span class="input-group-text">
+													<i class="fa fa-calendar-alt"></i>
+												</span>
+											</div>
+										</div>
+									</div>
                                 </div>
                             </div>
                         </div>
