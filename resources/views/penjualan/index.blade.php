@@ -63,7 +63,7 @@
                                 @foreach($penjualan as $data)
                                     <tr>
                                         <td>{{ \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d-m-Y') }}</td>
-                                        <td>{{ $data->pelanggan->nama }}</td>
+                                        <td>{{ $data->nama }}</td>
                                         <td>Rp. {{ number_format($data->total, 0, ',', '.') }}</td>
                                         <td class="d-flex">
                                             <a href="{{ route('penjualan.nota', $data->id) }}" target="_blank"><button type="button" class="btn btn-info"><i class="fa fa-file"></i></button></a>
